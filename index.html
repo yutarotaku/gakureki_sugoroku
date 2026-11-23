@@ -1,0 +1,1759 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#2456a5"><title>大学受験すごろく — シナリオC v1.1 AI対戦</title><style>:root{font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;color:#263449;background:#f4f7fb;font-size:14px}*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button{border:1px solid #ccd5e2;border-radius:9px;background:white;color:#253954;padding:9px 13px;cursor:pointer}button:hover:not(:disabled){background:#eaf0f8}button:disabled{opacity:.4;cursor:default}.primary{background:#2456a5;border-color:#2456a5;color:white}.primary:hover:not(:disabled){background:#1d4483}.green{background:#157b65;border-color:#157b65;color:#fff}.green:hover:not(:disabled){background:#106351}.danger{background:#a73d44;border-color:#a73d44;color:#fff}.small{padding:5px 9px;font-size:12px}.wide{width:100%}.shell{max-width:1280px;margin:0 auto;padding:17px}.bar{background:white;border-bottom:1px solid #d9e1eb;padding:14px 22px;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.bar strong{font-size:18px}.subtle{color:#64758b}.micro{font-size:12px;color:#64758b}.grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(275px,1fr);gap:16px;align-items:start}.panel{background:#fff;border:1px solid #dfe6ee;border-radius:13px;padding:16px;margin-bottom:14px;box-shadow:0 2px 8px #1f396008}.panel h2{font-size:17px;margin:0 0 12px}.panel h3{font-size:14px;margin:14px 0 8px}.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.between{justify-content:space-between}.stack{display:flex;flex-direction:column;gap:10px}.pill{border:1px solid #cbd7e6;border-radius:20px;padding:4px 9px;background:#f2f5fa;display:inline-block;font-size:12px}.notice{padding:12px;border-radius:9px;background:#edf5ff;border:1px solid #cfe1fc;margin:9px 0}.warn{background:#fff7e8;border-color:#f1d6a8}.choice{display:flex;flex-wrap:wrap;gap:8px}.choice button{flex:1 1 130px;min-height:39px}.muted{color:#69798e}.meter{height:8px;background:#e1e8ef;border-radius:7px;overflow:hidden}.meter>div{height:100%;background:#3477be}.stats{width:100%;border-collapse:collapse;font-size:13px}.stats td,.stats th{padding:7px 5px;border-bottom:1px solid #edf0f5;text-align:left}.stats td:last-child,.stats th:last-child{text-align:right}.stats th{color:#566880;font-weight:600}.statline{display:flex;gap:8px;align-items:center;justify-content:space-between;border-bottom:1px solid #eef2f7;padding:6px 0}.tag{font-size:12px;padding:3px 7px;border-radius:5px;background:#e8eef7}.tag.study{background:#dbeafc;color:#205a91}.tag.youth{background:#ffe4ed;color:#a22e5c}.tag.skill{background:#eee4ff;color:#713ba1}.tag.trait{background:#e9defc;color:#5b3381}.tag.portal,.tag.exit{background:#daf4e8;color:#15745d}.tag.event{background:#f0f0f0;color:#697587}.board{display:grid;grid-template-columns:repeat(8,minmax(70px,1fr));gap:6px}.tile{min-height:77px;border-radius:9px;padding:7px 5px;display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:center;text-align:center;border:1px solid #d8e3ee;background:#f4f7fb}.tile.study{background:#e8f2ff;border-color:#cadef7}.tile.youth{background:#ffedf3;border-color:#f6cddd}.tile.skill{background:#f3ebff;border-color:#decef3}.tile.trait{background:#f0eaff;border-color:#d6c5ef}.tile.portal,.tile.exit{background:#e7f7ed;border-color:#bde4cd}.tile .num{align-self:flex-start;color:#7e8b9d;font-size:11px}.tile .name{font-size:12px;font-weight:600}.tile.current{outline:3px solid #2b5cb1;outline-offset:0}.tile .players{display:flex;gap:2px;flex-wrap:wrap;justify-content:center}.avatar{background:#2d67b5;color:white;font-weight:700;font-size:11px;border-radius:50%;height:21px;min-width:21px;display:inline-flex;align-items:center;justify-content:center}.avatar.p1{background:#ad485e}.avatar.p2{background:#28765d}.avatar.p3{background:#8357ba}.avatar.p4{background:#a76c19}.readout{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}.readout>div{background:#f3f6fa;padding:8px;border-radius:8px;text-align:center}.readout strong{font-size:18px}.cards{display:grid;grid-template-columns:1fr 1fr;gap:7px}.cardinfo{background:#f8f9fd;border:1px solid #dce3ed;padding:10px;border-radius:9px;min-height:79px}.cardinfo strong{display:block;margin-bottom:5px}.cardinfo.negative{border-color:#e4aab0;background:#fff4f4}.cardinfo.consumable{border-color:#b0d6c9;background:#f0fbf6}.log{max-height:235px;overflow-y:auto;padding:8px 10px;background:#f7f9fc;border-radius:8px;border:1px solid #e6edf5;font-size:12px}.log p{margin:0;padding:4px 0;border-bottom:1px solid #e9edf4}.modalwrap{position:fixed;inset:0;background:#0d1b33ab;display:flex;align-items:center;justify-content:center;z-index:50;padding:16px}.modal{background:white;border-radius:14px;padding:20px;width:min(700px,100%);max-height:88vh;overflow-y:auto;box-shadow:0 10px 35px #0004}.modal h2{margin:0 0 13px}.modal table{width:100%;border-collapse:collapse}.modal td,.modal th{padding:7px;border-bottom:1px solid #eee;text-align:left}.chips{display:flex;flex-wrap:wrap;gap:7px}.chips button.selected{background:#daeaff;border-color:#3d76b9}.uni-table{width:100%;border-collapse:collapse;font-size:12px}.uni-table td,.uni-table th{padding:7px 5px;border-bottom:1px solid #e7edf5;vertical-align:middle}.uni-table th{background:#f2f6fb;text-align:left}.uni-table tr.blocked{opacity:.55}.result-score{font-size:30px;font-weight:750}.section-title{font-size:19px;margin:0 0 13px}.footer{padding:12px;text-align:center;color:#8390a0;font-size:11px}.sep{border:none;border-top:1px solid #e8eef4;margin:13px 0}.namefield{display:block;margin:8px 0}input[type=text],input[type=number],select{border:1px solid #cbd6e5;border-radius:8px;padding:8px;max-width:100%;background:white}input[type=number]{width:75px}.mini-label{font-size:12px;font-weight:600;margin:6px 0}.path-btn{padding:12px 13px}.route-note{border-left:3px solid #4983c8;padding:8px 10px;background:#f5f9ff;margin:8px 0}.scroll-x{overflow-x:auto}.hide{display:none}.strong{font-weight:700}.setup-row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.success{color:#147254}.failure{color:#b64242}.code{font-family:ui-monospace,monospace}.rules p{line-height:1.75}.rules li{margin:6px 0}.titleline{display:flex;align-items:center;gap:6px;justify-content:space-between;flex-wrap:wrap}@media(max-width:950px){.grid{grid-template-columns:1fr}.board{grid-template-columns:repeat(6,minmax(70px,1fr))}}@media(max-width:560px){.shell{padding:10px}.bar{padding:12px}.panel{padding:12px}.board{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}.tile{min-height:73px;padding:5px 3px}.tile .name{font-size:11px}.setup-row{grid-template-columns:1fr}.readout{grid-template-columns:repeat(5,1fr)}.readout strong{font-size:15px}.uni-table{min-width:620px}.modal{padding:15px}.choice button{flex:1 1 110px}}
+ .uni-filters{padding:10px 0;margin:6px 0 12px;gap:12px}.uni-filters label{font-size:12px;color:#54647b;display:flex;align-items:center;gap:5px}.uni-filters input{width:145px}.unilist-cards{display:none}.uni-card{padding:11px;border:1px solid #d9e2ec;border-radius:10px;background:#fbfcff;display:flex;flex-direction:column;gap:7px}.uni-card .row{align-items:flex-start}.uni-card .row strong{flex:1;font-size:13px;line-height:1.5}.uni-card button{align-self:flex-start}.uni-card .failure{line-height:1.4}@media(max-width:560px){.uni-desktop{display:none}.unilist-cards{display:flex;flex-direction:column;gap:7px}.uni-filters{display:grid;grid-template-columns:1fr;align-items:stretch}.uni-filters label{display:flex;justify-content:space-between}.uni-filters label select,.uni-filters label input{flex:1;max-width:215px}.panel{overflow-wrap:anywhere}}
+.ai-preview{border:1px solid #bfd6ea;border-radius:11px;background:#eff6fd;padding:12px;margin:12px 0}.ai-preview p{margin:7px 0;font-size:12px}.ai-reason{display:block;font-size:10px;color:#627995;font-weight:400;line-height:1.4;max-width:210px;margin-top:2px}.statline>span:nth-child(2){flex:1;min-width:0}.statline>span:last-child{white-space:nowrap}@media(max-width:560px){.ai-preview{padding:10px}.ai-reason{max-width:160px}.statline{font-size:12px}}
+</style></head><body><div id="app"></div><script>const BOARD_DATA={
+  "pre": [
+    {
+      "type": "youth"
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "youth"
+    }
+  ],
+  "elem": [
+    {
+      "type": "study",
+      "k": 4,
+      "quiz": false
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": true
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "study",
+      "k": 4,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": true
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 4,
+      "quiz": false
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "study",
+      "k": 4,
+      "quiz": true
+    },
+    {
+      "type": "event"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "study",
+      "k": 4,
+      "quiz": false
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    }
+  ],
+  "midpub": [
+    {
+      "type": "study",
+      "k": 4,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": true
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 4,
+      "quiz": false
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": true
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "study",
+      "k": 4,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 4,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "event"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    }
+  ],
+  "midpri": [
+    {
+      "type": "study",
+      "k": 4,
+      "quiz": true
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": true
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": true
+    },
+    {
+      "type": "study",
+      "k": 4,
+      "quiz": false
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": true
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "study",
+      "k": 4,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 4,
+      "quiz": true
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": true
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 4,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    }
+  ],
+  "high_coed": [
+    {
+      "type": "study",
+      "k": 4,
+      "quiz": false
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "portal"
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": true
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "portal"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 4,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": true
+    },
+    {
+      "type": "study",
+      "k": 4,
+      "quiz": false
+    },
+    {
+      "type": "portal"
+    },
+    {
+      "type": "study",
+      "k": 5,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 2,
+      "quiz": false
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "portal"
+    },
+    {
+      "type": "study",
+      "k": 2,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "youth"
+    }
+  ],
+  "high_public": [
+    {
+      "type": "study",
+      "k": 5,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": true
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "portal"
+    },
+    {
+      "type": "study",
+      "k": 5,
+      "quiz": false
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "portal"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": true
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 5,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": true
+    },
+    {
+      "type": "study",
+      "k": 4,
+      "quiz": false
+    },
+    {
+      "type": "portal"
+    },
+    {
+      "type": "study",
+      "k": 5,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "portal"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "youth"
+    }
+  ],
+  "high_private": [
+    {
+      "type": "study",
+      "k": 5,
+      "quiz": true
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": true
+    },
+    {
+      "type": "portal"
+    },
+    {
+      "type": "study",
+      "k": 5,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": true
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "study",
+      "k": 5,
+      "quiz": false
+    },
+    {
+      "type": "portal"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": true
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 5,
+      "quiz": false
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "portal"
+    },
+    {
+      "type": "study",
+      "k": 5,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "portal"
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "youth"
+    }
+  ],
+  "ronin": [
+    {
+      "type": "study",
+      "k": 2,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 2,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 4,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 2,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 2,
+      "quiz": false
+    },
+    {
+      "type": "study",
+      "k": 3,
+      "quiz": true
+    }
+  ],
+  "after": [
+    {
+      "type": "exit"
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "skill"
+    },
+    {
+      "type": "youth"
+    },
+    {
+      "type": "youth"
+    }
+  ]
+};</script><script>'use strict';
+/* Scenario C browser game, test build v1.0. All 81 university cutoffs from improved-AI scenario C;
+   other game mechanics retained from v0.9. This is a browser game, not an AI simulation. */
+const VERSION='D-1.1-C-AI', STORE='daigaku_sugoroku_scenario_C_v11_ai', OLD_STORE='daigaku_sugoroku_scenario_C_v11_legacy_none';
+const SUB=['国','数','英','理','社'], SIDES=[4,6,8,10,12], STAGENAMES=['未就学児期','小学校','中学校','高校','浪人'], STAGETURNS=[2,6,6,6,3];
+const SCNAMES={pre:'未就学児期',elem:'小学校',midpub:'公立中学校',midpri:'私立中学校',high_coed:'公立共学校',high_public:'公立進学校',high_private:'私立進学校',after:'放課後・街',ronin:'浪人・予備校'};
+const FAMILY=[{ed:0,inc:0,w:3},{ed:1,inc:0,w:2},{ed:2,inc:0,w:1},{ed:0,inc:1,w:2},{ed:1,inc:1,w:3},{ed:2,inc:1,w:2},{ed:0,inc:2,w:1},{ed:1,inc:2,w:2},{ed:2,inc:2,w:2}];
+const TRAITS={
+ 'コツコツ型':'各ステージ1回、学習結果0を+1にする。','一夜漬け型':'各ステージ1回、中学以降の学習ダイスを振り直し良い方を採用。',
+ '気分屋':'各ステージ1回、学習結果0のダイスを振り直す（再ロール値を採用）。','本番に強い':'受験フェーズごとに1回、入試ダイスを振り直し良い方を採用。',
+ '社交的':'各ステージ1回、青春トークン獲得時にさらに+1。','探究型':'各ステージ1回、4科目以上の学習時、選択科目のうち1科目に+1。'};
+const CARD_WEIGHT={
+ '文理横断の学習':21,'青春の底力':7,'弱点克服':7,'効率的な勉強法':7,'模擬試験の達人':5,'進路の先読み':6,'予備校優待':7,'クラスの人気者':7,
+ '復習ノート':5,'追加履修券':5,'塾の無料券':5,'赤本':5,'文化祭招待券':5,
+ '勉強嫌い':3,'あがり症':3,'人見知り':3,'コツコツ型':1,'一夜漬け型':1,'気分屋':1,'本番に強い':1,'社交的':1,'探究型':1,
+ 'ノート隠し':5,'足止め':4,'合同勉強会':5,'模試の情報交換':4,'文化祭の共同企画':4,'才能開花':12
+};
+const NEG=['勉強嫌い','あがり症','人見知り'];
+const PERSIST=['文理横断の学習','青春の底力','弱点克服','効率的な勉強法','模擬試験の達人','進路の先読み','予備校優待','クラスの人気者',...NEG];
+const ONESHOT=['復習ノート','追加履修券','塾の無料券','赤本','文化祭招待券','ノート隠し','足止め','合同勉強会','模試の情報交換','文化祭の共同企画','才能開花'];
+const CARD_DESC={
+ '文理横断の学習':'毎回、学習マスで選べる科目数+1。2枚重ねなら+2（最大5回）。1枠に重ねる。',
+ '青春の底力':'青春トークン3個以上なら、学習マスごとに選んだ1科目の成長結果を2倍にする（恒常発動）。塾には適用しない。',
+ '弱点克服':'1ステージ1回、能力値が最も低い科目の学習結果0を+1にできる。',
+ '効率的な勉強法':'1ステージ1回、学習ダイスの0を振り直し良い方を採用。',
+ '模擬試験の達人':'1ステージ1回、入試の科目別ダイス1個を振り直し良い方を採用。',
+ '進路の先読み':'1ステージ1回、移動出目を±1調整（1以上）。',
+ '予備校優待':'1ステージ1回、塾・予備校の資金1を無料にする。',
+ 'クラスの人気者':'1ステージ1回、青春獲得時にトークン+1。',
+ '復習ノート':'使い切り。学習の成長0を振り直し、良い方を採用。',
+ '追加履修券':'使い切り。その学習マスで選べる科目+1（最大5）。',
+ '塾の無料券':'使い切り。塾・予備校1回を無料にする。',
+ '赤本':'使い切り。大学入試の科目ダイス1個を振り直し良い方を採用。',
+ '文化祭招待券':'使い切り。青春トークン獲得時に+1。',
+ 'ノート隠し':'攻撃。相手の次の学習ダイス1個を1段階弱くする。',
+ '足止め':'攻撃。相手の次の移動歩数を-1（最低1）。',
+ '合同勉強会':'協調。相手の同意を得て、双方の次の学習の選択科目+1。',
+ '模試の情報交換':'協調。相手の同意を得て、双方の次の大学入試の高配点科目を一時的に強化。',
+ '文化祭の共同企画':'協調。相手の同意を得て、双方の次の青春イベントで+1。',
+ '勉強嫌い':'デメリット。ステージ最初の学習で選択科目数-1（最低1）。',
+ 'あがり症':'デメリット。ステージ最初の受験で科目別ダイス1個が1段階弱くなる。',
+ '人見知り':'デメリット。ステージ最初の青春獲得数-1（最低0）。',
+ '才能開花':'使い切り。自分の手番に好きな1科目の成長ダイスを1段階恒久的に強化（上限d12）。'
+};
+// {'name', 'points', 'subs', 'cut', 'cost', 'min', 'w', 'req'}: Scenario D provisional university parameters.
+const U=(name,points,subs,cut,cost=0,min={},w={},req=null)=>({name,points,subs:subs.split(''),cut,cost,min,w,req});
+// 国公立は全5科目の一次最低能力値を満たし、二次科目のみを合算。私立は一次なし。
+const UNIS=[
+ U("東京大学・理科一類",20,"国英数理",124,0,{"国": 9, "数": 9, "英": 9, "理": 9, "社": 9},{"数": 2, "理": 2}),
+ U("東京大学・文科一類",20,"国英数社",124,0,{"国": 9, "数": 9, "英": 9, "理": 9, "社": 9},{"国": 2, "社": 2}),
+ U("京都大学・理学部",19,"国英数理",115,0,{"国": 8, "数": 8, "英": 8, "理": 8, "社": 8},{"数": 2, "理": 2}),
+ U("京都大学・法学部",19,"国英数社",115,0,{"国": 8, "数": 8, "英": 8, "理": 8, "社": 8},{"国": 2, "社": 2}),
+ U("東京科学大学・工学院",19,"英数理",128,0,{"国": 8, "数": 8, "英": 8, "理": 8, "社": 8},{"英": 0.5, "数": 3, "理": 3}),
+ U("一橋大学・経済学部",19,"国英数社",114,0,{"国": 8, "数": 8, "英": 8, "理": 8, "社": 8},{"数": 2, "社": 2}),
+ U("大阪大学・基礎工学部",18,"英数理",97,0,{"国": 7, "数": 7, "英": 7, "理": 7, "社": 7},{"数": 2, "理": 2}),
+ U("大阪大学・経済学部",18,"国英数",80,0,{"国": 7, "数": 7, "英": 7, "理": 7, "社": 7},{"数": 2}),
+ U("東北大学・工学部",17,"英数理",87,0,{"国": 6, "数": 6, "英": 6, "理": 6, "社": 6},{"数": 2, "理": 2}),
+ U("東北大学・経済学部",17,"国英数",53,0,{"国": 6, "数": 6, "英": 6, "理": 6, "社": 6},{}),
+ U("名古屋大学・工学部",17,"英数理",87,0,{"国": 6, "数": 6, "英": 6, "理": 6, "社": 6},{"数": 2, "理": 2}),
+ U("名古屋大学・経済学部",17,"国英数",53,0,{"国": 6, "数": 6, "英": 6, "理": 6, "社": 6},{}),
+ U("北海道大学・法学部",16,"国英数",49,0,{"国": 5, "数": 5, "英": 5, "理": 5, "社": 5},{}),
+ U("北海道大学・工学部",16,"英数理",49,0,{"国": 5, "数": 5, "英": 5, "理": 5, "社": 5},{}),
+ U("九州大学・経済学部",16,"国英数",49,0,{"国": 5, "数": 5, "英": 5, "理": 5, "社": 5},{}),
+ U("九州大学・工学部",16,"英数理",81,0,{"国": 5, "数": 5, "英": 5, "理": 5, "社": 5},{"数": 2, "理": 2}),
+ U("神戸大学・経済学部",15,"国英数",66,0,{"国": 5, "数": 5, "英": 5, "理": 5, "社": 5},{"数": 2}),
+ U("神戸大学・経営学部",15,"国英数",46,0,{"国": 5, "数": 5, "英": 5, "理": 5, "社": 5},{}),
+ U("神戸大学・法学部",14,"国英数",63,0,{"国": 5, "数": 5, "英": 5, "理": 5, "社": 5},{"国": 2}),
+ U("筑波大学・社会学類",14,"国英数",48,0,{"国": 4, "数": 4, "英": 4, "理": 4, "社": 4},{}),
+ U("東京外国語大学・言語文化学部",14,"国英社",62,0,{"国": 4, "数": 4, "英": 4, "理": 4, "社": 4},{"英": 2}),
+ U("東京農工大学・工学部",14,"英数理",78,0,{"国": 4, "数": 4, "英": 4, "理": 4, "社": 4},{"数": 2, "理": 2}),
+ U("横浜国立大学・経済学部",13,"英数",38,0,{"国": 4, "数": 4, "英": 4, "理": 4, "社": 4},{}),
+ U("電気通信大学・情報理工学域",13,"英数理",65,0,{"国": 4, "数": 4, "英": 4, "理": 4, "社": 4},{"数": 2}),
+ U("千葉大学・法政経学部",12,"国英数",43,0,{"国": 4, "数": 4, "英": 4, "理": 4, "社": 4},{}),
+ U("広島大学・工学部",12,"英数理",43,0,{"国": 4, "数": 4, "英": 4, "理": 4, "社": 4},{}),
+ U("金沢大学・経済学類",11,"国英数",41,0,{"国": 3, "数": 3, "英": 3, "理": 3, "社": 3},{}),
+ U("広島大学・法学部",11,"国英",30,0,{"国": 3, "数": 3, "英": 3, "理": 3, "社": 3},{}),
+ U("新潟大学・経済科学部",10,"英数",30,0,{"国": 3, "数": 3, "英": 3, "理": 3, "社": 3},{}),
+ U("静岡大学・経済学科",9,"国英社",39,0,{"国": 2, "数": 2, "英": 2, "理": 2, "社": 2},{}),
+ U("信州大学・工学部",9,"英数理",39,0,{"国": 2, "数": 2, "英": 2, "理": 2, "社": 2},{}),
+ U("山形大学・人文社会科学部",8,"国英",25,0,{"国": 2, "数": 2, "英": 2, "理": 2, "社": 2},{}),
+ U("早稲田大学・政治経済学部",17,"国英数",78,1,{},{"国": 1, "英": 2, "数": 1.5}),
+ U("早稲田大学・法学部",17,"国英社",78,1,{},{"国": 1.5, "英": 2, "社": 1}),
+ U("早稲田大学・先進理工学部",17,"英数理",78,1,{},{"英": 1, "数": 2, "理": 1.5}),
+ U("慶應義塾大学・法学部",17,"国英社",78,1,{},{"国": 1, "英": 2, "社": 1.5}),
+ U("慶應義塾大学・経済学部A方式",17,"国英数",78,1,{},{"国": 0.5, "英": 2, "数": 2}),
+ U("慶應義塾大学・理工学部",17,"英数理",78,1,{},{"英": 1.5, "数": 1, "理": 2}),
+ U("慶應義塾大学・経済学部B方式",16,"国英社",74,1,{},{"国": 0.5, "英": 2, "社": 2}),
+ U("早稲田大学・商学部数学型",16,"国英数",74,1,{},{"国": 1, "英": 1.5, "数": 2}),
+ U("慶應義塾大学・商学部A方式",16,"英数社",74,1,{},{"英": 2.5, "数": 1, "社": 1}),
+ U("早稲田大学・商学部地歴公民型",15,"国英社",70,1,{},{"国": 0.5, "英": 2.5, "社": 1.5}),
+ U("慶應義塾大学・商学部B方式",15,"国英社",70,1,{},{"国": 1, "英": 2.5, "社": 1}),
+ U("早稲田大学・社会科学部（数学選択）",14,"国英数",66,1,{},{"国": 2, "英": 2, "数": 0.5}),
+ U("早稲田大学・社会科学部（社会選択）",14,"国英社",66,1,{},{"国": 2, "英": 2, "社": 0.5}),
+ U("慶應義塾大学・総合政策学部（数学選択）",14,"国英数",66,1,{},{"国": 2.5, "英": 1.5, "数": 0.5}),
+ U("慶應義塾大学・総合政策学部（社会選択）",14,"国英社",66,1,{},{"国": 2.5, "英": 1.5, "社": 0.5}),
+ U("慶應義塾大学・環境情報学部（英語選択）",14,"国数英",66,1,{},{"国": 2.5, "数": 1.5, "英": 0.5}),
+ U("慶應義塾大学・環境情報学部（理科選択）",14,"国数理",66,1,{},{"国": 2.5, "数": 1.5, "理": 0.5}),
+ U("慶應義塾大学・文学部",13,"国英社",62,1,{},{"国": 1.5, "英": 2.5, "社": 0.5}),
+ U("早稲田大学・文化構想学部",13,"国英社",62,1,{},{"国": 2, "英": 1.5, "社": 1}),
+ U("早稲田大学・文学部",13,"国英社",62,1,{},{"国": 2.5, "英": 1.5, "社": 0.5}),
+ U("早稲田大学・人間科学部（数学選択）",12,"国英数",59,1,{},{"国": 2, "英": 1.5, "数": 1}),
+ U("早稲田大学・人間科学部（社会選択）",12,"国英社",59,1,{},{"国": 2, "英": 1.5, "社": 1}),
+ U("上智大学・経済学部",12,"国英数",52,1,{},{}),
+ U("上智大学・外国語学部英語学科",12,"国英社",52,1,{},{}),
+ U("上智大学・理工学部",12,"英数理",52,1,{},{}),
+ U("東京理科大学・創域理工学部",12,"英数理",52,1,{},{}),
+ U("中央大学・法学部法律学科",10,"国英社",48,1,{},{}),
+ U("立教大学・経営学部",10,"国英数",48,1,{},{}),
+ U("明治大学・政治経済学部",10,"国英社",48,1,{},{}),
+ U("明治大学・理工学部",10,"英数理",48,1,{},{}),
+ U("青山学院大学・国際政治経済学部",10,"国英社",48,1,{},{}),
+ U("立教大学・経済学部",9,"国英数",45,1,{},{}),
+ U("青山学院大学・経済学部",9,"国英数",45,1,{},{}),
+ U("中央大学・経済学部",9,"国英数",45,1,{},{}),
+ U("青山学院大学・理工学部",9,"英数理",45,1,{},{}),
+ U("立教大学・理学部",9,"英数理",45,1,{},{}),
+ U("法政大学・経済学部",8,"国英社",43,1,{},{}),
+ U("法政大学・情報科学部",8,"英数理",43,1,{},{}),
+ U("日本大学・法学部",7,"国英社",41,1,{},{}),
+ U("東洋大学・経済学部",7,"国英社",41,1,{},{}),
+ U("駒澤大学・経済学部",7,"国英社",41,1,{},{}),
+ U("専修大学・商学部",7,"国英社",41,1,{},{}),
+ U("日本大学・理工学部",7,"英数理",41,1,{},{}),
+ U("東洋大学・理工学部",7,"英数理",41,1,{},{}),
+ U("大東文化大学・経済学部",5,"国英社",36,1,{},{}),
+ U("亜細亜大学・経済学部",5,"国英社",36,1,{},{}),
+ U("国士舘大学・政経学部",5,"国英社",36,1,{},{}),
+ U("東海大学・工学部",5,"英数理",36,1,{},{}),
+ U("帝京大学・理工学部",5,"英数理",36,1,{},{})
+];
+
+// Scenario C (improved-AI evaluation, 2026-11-23): exact per-university
+// admission cutoffs from university_cutoffs_ABC.csv. All other game rules are unchanged.
+// The national first-stage requirements retain the prior stream-specific relief:
+// a science program relaxes Social Studies by 2; an arts program relaxes Science by 2.
+const SCENARIO_C_CUTOFFS = Object.freeze({
+  "東京大学・理科一類": 93.0,
+  "東京大学・文科一類": 93.0,
+  "京都大学・理学部": 91.0,
+  "京都大学・法学部": 91.0,
+  "東京科学大学・工学院": 100.0,
+  "一橋大学・経済学部": 92.0,
+  "大阪大学・基礎工学部": 77.0,
+  "大阪大学・経済学部": 64.0,
+  "東北大学・工学部": 77.0,
+  "東北大学・経済学部": 47.0,
+  "名古屋大学・工学部": 77.0,
+  "名古屋大学・経済学部": 47.0,
+  "北海道大学・法学部": 43.0,
+  "北海道大学・工学部": 43.0,
+  "九州大学・経済学部": 43.0,
+  "九州大学・工学部": 71.0,
+  "神戸大学・経済学部": 58.0,
+  "神戸大学・経営学部": 40.0,
+  "神戸大学・法学部": 64.0,
+  "筑波大学・社会学類": 49.0,
+  "東京外国語大学・言語文化学部": 63.0,
+  "東京農工大学・工学部": 79.5,
+  "横浜国立大学・経済学部": 38.5,
+  "電気通信大学・情報理工学域": 66.0,
+  "千葉大学・法政経学部": 44.0,
+  "広島大学・工学部": 44.0,
+  "金沢大学・経済学類": 42.0,
+  "広島大学・法学部": 30.5,
+  "新潟大学・経済科学部": 30.5,
+  "静岡大学・経済学科": 40.0,
+  "信州大学・工学部": 40.0,
+  "山形大学・人文社会科学部": 25.5,
+  "早稲田大学・政治経済学部": 81.5,
+  "早稲田大学・法学部": 81.5,
+  "早稲田大学・先進理工学部": 81.5,
+  "慶應義塾大学・法学部": 81.5,
+  "慶應義塾大学・経済学部A方式": 81.5,
+  "慶應義塾大学・理工学部": 81.5,
+  "慶應義塾大学・経済学部B方式": 77.5,
+  "早稲田大学・商学部数学型": 77.5,
+  "慶應義塾大学・商学部A方式": 77.5,
+  "早稲田大学・商学部地歴公民型": 72.5,
+  "慶應義塾大学・商学部B方式": 72.5,
+  "早稲田大学・社会科学部（数学選択）": 68.5,
+  "早稲田大学・社会科学部（社会選択）": 68.5,
+  "慶應義塾大学・総合政策学部（数学選択）": 68.5,
+  "慶應義塾大学・総合政策学部（社会選択）": 68.5,
+  "慶應義塾大学・環境情報学部（英語選択）": 68.5,
+  "慶應義塾大学・環境情報学部（理科選択）": 68.5,
+  "慶應義塾大学・文学部": 64.5,
+  "早稲田大学・文化構想学部": 64.5,
+  "早稲田大学・文学部": 64.5,
+  "早稲田大学・人間科学部（数学選択）": 60.0,
+  "早稲田大学・人間科学部（社会選択）": 60.0,
+  "上智大学・経済学部": 53.0,
+  "上智大学・外国語学部英語学科": 53.0,
+  "上智大学・理工学部": 53.0,
+  "東京理科大学・創域理工学部": 53.0,
+  "中央大学・法学部法律学科": 49.0,
+  "立教大学・経営学部": 49.0,
+  "明治大学・政治経済学部": 49.0,
+  "明治大学・理工学部": 49.0,
+  "青山学院大学・国際政治経済学部": 49.0,
+  "立教大学・経済学部": 46.0,
+  "青山学院大学・経済学部": 46.0,
+  "中央大学・経済学部": 46.0,
+  "青山学院大学・理工学部": 46.0,
+  "立教大学・理学部": 46.0,
+  "法政大学・経済学部": 44.0,
+  "法政大学・情報科学部": 44.0,
+  "日本大学・法学部": 42.0,
+  "東洋大学・経済学部": 42.0,
+  "駒澤大学・経済学部": 42.0,
+  "専修大学・商学部": 42.0,
+  "日本大学・理工学部": 42.0,
+  "東洋大学・理工学部": 42.0,
+  "大東文化大学・経済学部": 37.0,
+  "亜細亜大学・経済学部": 37.0,
+  "国士舘大学・政経学部": 37.0,
+  "東海大学・工学部": 37.0,
+  "帝京大学・理工学部": 37.0
+});
+for(const uni of UNIS){
+  if(uni.cost===0){
+    const scienceTrack=uni.subs.includes('理')&&!uni.subs.includes('社');
+    const relaxedSubject=scienceTrack?'社':'理';
+    uni.min[relaxedSubject]=Math.max(0,(uni.min[relaxedSubject]??0)-2);
+  }
+  if(!Object.prototype.hasOwnProperty.call(SCENARIO_C_CUTOFFS,uni.name)){
+    throw Error('大学合格ライン未定義: '+uni.name);
+  }
+  uni.cut=SCENARIO_C_CUTOFFS[uni.name];
+}
+if(UNIS.length!==Object.keys(SCENARIO_C_CUTOFFS).length){
+  throw Error('大学一覧とシナリオC合格ラインの登録件数が一致しません');
+}
+const floorText=(uni,n=0)=>SUB.map(s=>`${s}${(uni.min[s]??0)+n}`).join(' / ');
+
+const Q={
+ '国':[['「走れメロス」の作者は？','太宰治'],['「徒然草」の作者は？','吉田兼好'],['「枕草子」の作者は？','清少納言'],['「温故知新」の意味は？','古きをたずね新しきを知る']],
+ '数':[['3x+5=20 のとき x は？','5'],['直角三角形の三辺が3,4,?なら斜辺は？','5'],['2の5乗は？','32'],['二次関数 y=x² の頂点は？','(0,0)']],
+ '英':[['“achieve” の意味は？','達成する'],['“although” の意味は？','〜だけれども'],['“wrote” の原形は？','write'],['「彼女は昨日来た」を英語で？','She came yesterday.']],
+ '理':[['水の化学式は？','H₂O'],['酸性を示すpHの範囲は？','7未満'],['ヒトの体細胞の染色体数は？','46本'],['酸素の元素記号は？','O']],
+ '社':[['日本国憲法の施行年は？','1947年'],['鎌倉幕府を開いた人物は？','源頼朝'],['需要曲線が通常右下がりである理由は？','価格が低いほど需要量が増えるため'],['EUの共通通貨は？','ユーロ']]
+};
+let UNDO_STACK=[];
+const UNDO_KEY="daigaku_sugoroku_scenario_C_v10_undo";
+const UNDO_LIMIT=40;
+function persistUndo(){try{localStorage.setItem(UNDO_KEY,JSON.stringify(UNDO_STACK))}catch(ex){}}
+function resetUndo(){UNDO_STACK=[];try{localStorage.removeItem(UNDO_KEY)}catch(ex){}}
+function readUndo(){try{let h=JSON.parse(localStorage.getItem(UNDO_KEY)||"[]");UNDO_STACK=Array.isArray(h)?h.slice(-UNDO_LIMIT):[]}catch(ex){UNDO_STACK=[]}}
+function undoAction(){if(!G||!UNDO_STACK.length)return;if(G.aiMode)G.aiPaused=true;let raw=UNDO_STACK.pop();try{if(timer){clearInterval(timer);timer=null}G=JSON.parse(raw);G.overlay=null;if(G.aiMode)G.aiPaused=true;if(G.phase==='quiz'&&G.quiz){G.quiz.deadline=Date.now()+10000;G.quiz.expired=false}save();persistUndo();render()}catch(ex){alert("直前の操作に戻せませんでした："+ex.message)}}
+let G=null, SETUP={count:4,names:['プレイヤー1','プレイヤー2','プレイヤー3','プレイヤー4'],quick:false,aiMode:true}, timer=null;
+const $=id=>document.getElementById(id);const r=(n)=>1+Math.floor(Math.random()*n);const pick=a=>a[Math.floor(Math.random()*a.length)];
+const e=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const weightedPick=(objs,ws)=>{let t=ws.reduce((a,b)=>a+b,0),x=Math.random()*t;for(let i=0;i<objs.length;i++){x-=ws[i];if(x<0)return objs[i]}return objs[objs.length-1]};
+const hasSavedGame=()=>{try{return !!localStorage.getItem(STORE)}catch(ex){return false}};
+const youthScore=n=>n>=3?n+1:0;const dieName=(p,s,delta=0)=>`d${SIDES[Math.max(0,Math.min(4,p.tiers[s]+delta))]}`;
+function active(){return G.players[G.order[G.turn]]};function log(m){if(!G)return;G.history.unshift({when:`${G.stage===null?'進路':STAGENAMES[G.stage]}${G.round}巡`,msg:m});G.history=G.history.slice(0,500);}
+function save(){try{localStorage.setItem(STORE,JSON.stringify(G))}catch(ex){}}function load(){try{
+ const newer=localStorage.getItem(STORE),older=localStorage.getItem(OLD_STORE),raw=newer||older;
+ if(!raw)return false;
+ let g=JSON.parse(raw);if((g?.version===VERSION||g?.version==='D-0.8-U6')&&Array.isArray(g.players)){
+ const migrated=g.version!==VERSION;g.version=VERSION;G=g;
+ if(migrated){resetUndo();save()}else readUndo();
+ return true;
+ }
+ }catch(ex){}return false}
+function addStat(p,s,k){let before=p.stats[s];p.stats[s]=Math.max(0,Math.min(20,before+k));return p.stats[s]-before}
+function slots(p){return p.cards.length};function has(p,k){return p.cards.some(x=>x.name===k)};function card(p,k){return p.cards.find(x=>x.name===k)};
+function used(p,k){return p.usedStage.includes(k)};function markUsed(p,k){if(!used(p,k))p.usedStage.push(k)}
+function payTutorPossible(p){return p.money>=1||(has(p,'予備校優待')&&!used(p,'予備校優待'))||(has(p,'塾の無料券')&&!p.usedConsumable)};
+function takeCard(p,name){let i=p.cards.findIndex(c=>c.name===name);if(i<0)return false;p.cards.splice(i,1);p.usedConsumable=true;log(`${p.name}が「${name}」を使用した`);return true}
+function initialPlayer(i,name){let family=weightedPick(FAMILY,FAMILY.map(x=>x.w)),got=pick(SUB),weak=pick(SUB.filter(s=>s!==got)),stats=Object.fromEntries(SUB.map(s=>[s,0]));
+ let bonus=[],chosen=[...SUB];for(let j=0;j<family.ed;j++){let s=pick(chosen);chosen=chosen.filter(x=>x!==s);stats[s]++;bonus.push(s)}
+ let tiers=Object.fromEntries(SUB.map(s=>[s,s===got?2:s===weak?0:1]));
+ return {id:i,name:name||`プレイヤー${i+1}`,edu:family.ed,income:family.inc,stats,tiers,gift:got,weak,birthBonus:bonus,
+  trait:pick(Object.keys(TRAITS)),cards:[],usedStage:[],usedConsumable:false,pending:{attackStudy:0,attackMove:0,coStudy:0,coYouth:0,coExam:0},
+  money:0,youth:0,school:'high_coed',middle:'midpub',board:'pre',pos:0,lastPortal:3,extra:{理2:false,社2:false},
+  ronin:false,oldOffer:null,offer:null,finalPts:0,schoolExam:[],mockHistory:[],uniResults:[],rolled:0,quizCorrect:0};}
+function fresh(){resetUndo();let names=Array.from({length:SETUP.aiMode?4:SETUP.count},(_,i)=>{let x=$('name'+i);return SETUP.aiMode&&i>0?['AI①・私立重点','AI②・国立挑戦','AI③・柔軟型'][i-1]:(x?.value.trim()||SETUP.names[i])});
+ G={version:VERSION,stage:null,screen:'play',phase:'move',round:1,turn:0,order:[],players:names.map((nm,i)=>initialPlayer(i,nm)),
+ history:[],aiMode:SETUP.aiMode,aiPaused:false,aiSpeed:'fast',remaining:0,movementRoll:0,switchedRoll:false,study:null,quiz:null,pendingDraw:null,pendingCoop:null,pendingCard:null,
+ exam:null,mock:null,mockCompleted:false,rankQueue:[],pendingSchool:null,schoolCut:{middle:27,high_public:33,high_private:46},usedQuestions:{}};
+ G.players.forEach((p,i)=>{p.ai=!!(SETUP.aiMode&&i>0);p.aiStyle=['human','private','national','flex'][i]||'flex';p.aiReason='';p.aiFocus=null});log(SETUP.aiMode?'上級AI3人との対戦開始':'新しいゲームを開始');if(SETUP.quick){for(let s=0;s<3;s++){for(let p of G.players){p.money+=[2,3,4][p.income];if(s>=1){for(let q=0;q<3;q++){const sub=pick(SUB);addStat(p,sub,1+Math.floor(Math.random()*2))}}} } G.players.forEach((p,i)=>{p.school=['high_coed','high_public','high_private'][i%3];p.middle=i%2?'midpri':'midpub';});startStage(3)}else startStage(0);
+ log('進行方式：シナリオD。文理横断は2枚で上級化、中高受験も科目別ダイス方式');save();render()}
+function startStage(stage){G.stage=stage;if(stage===3)G.mockCompleted=false;G.screen='play';G.phase='move';G.round=1;G.turn=0;G.order=G.players.filter(p=>stage!==4||p.ronin).map(p=>p.id);G.remaining=0;G.movementRoll=0;G.viewBoard=null;G.switchedRoll=false;G.tutorDone=false;G.tutorInstead=false;
+ for(let p of G.players){if(stage===4&&!p.ronin)continue;p.money+=[2,3,4][p.income];p.usedStage=[];p.usedConsumable=false;p.board=stage===0?'pre':stage===1?'elem':stage===2?p.middle:stage===3?p.school:'ronin';p.pos=0;p.lastPortal=3;}
+ log(`${STAGENAMES[stage]}開始。家計に応じて資金を支給`);save();render()}
+function currentBoard(p){return BOARD_DATA[p.board]};
+function stageComplete(){
+ if(G.stage===1||G.stage===2){beginSchoolSelection();return}
+ if(G.stage===0){startStage(1);return}if(G.stage===3){beginUniversityExam(false);return}if(G.stage===4){beginUniversityExam(true);return}}
+function advanceTurnRaw(){G.turn++;if(G.turn>=G.order.length){G.turn=0;G.round++;if(G.round>STAGETURNS[G.stage]){stageComplete();return}if(G.stage===3&&G.round===4&&!G.mockCompleted){G.mockCompleted=true;beginMockExam();return}}
+ let p=active();p.usedConsumable=false;G.phase='move';G.remaining=0;G.study=null;G.quiz=null;G.pendingDraw=null;G.tutorDone=false;G.tutorInstead=false;G.switchedRoll=false;save();render()}
+function nextTurn(){if(G.screen!=='play')return;advanceTurnRaw()}
+function rankChoose(s){return;}
+function beginSchoolSelection(){G.screen='schoolExam';G.pendingSchool={type:G.stage===1?'middle':'high',index:0,last:null};save();render()}
+
+// Mid-high-school mock examination: free, diagnostic-only, no cards or persistent effects consumed.
+function beginMockExam(){
+ G.screen='mockExam';G.phase='mockChoose';G.mock={order:G.players.map(p=>p.id),index:0,choices:[],cursor:0,results:[],current:null};
+ log('高校3ターン目終了：模試フェーズ（3校まで、費用・出願枠・カード消費なし）');save();render();
+}
+function mockP(){return G.players[G.mock.order[G.mock.index]]}
+function mockToggle(i){if(G.screen!=='mockExam'||G.phase!=='mockChoose')return;let u=UNIS[Number(i)];if(!u)return;let a=G.mock.choices,idx=a.indexOf(Number(i));if(idx>=0)a.splice(idx,1);else if(a.length<3)a.push(Number(i));save();render()}
+function mockSubmit(){if(G.screen!=='mockExam'||G.phase!=='mockChoose')return;G.mock.cursor=0;G.mock.results=[];G.mock.current=null;G.phase=G.mock.choices.length?'mockReady':'mockSummary';save();render()}
+function mockRoll(){if(G.screen!=='mockExam'||G.phase!=='mockReady')return;let p=mockP(),m=G.mock,u=UNIS[m.choices[m.cursor]],faces={};
+ for(let s of u.subs)faces[s]=oneRoll(p,s);
+ // Diagnostic of the existing negative card, without marking it used.
+ if(has(p,'あがり症')&&!used(p,'あがり症')){let s=pick(u.subs);faces[s]=oneRoll(p,s,-1)}
+ let natPos=m.choices.slice(0,m.cursor).filter(i=>UNIS[i].cost===0).length;
+ let floorFails=u.cost?[]:SUB.filter(s=>p.stats[s]<(u.min[s]??0)+(natPos>=1?1:0));
+ const current={uid:m.choices[m.cursor],faces,rerolled:[],sourcesUsed:[],floorFails,score:0,passed:false};m.current=current;calcMockResult();G.phase='mockRolled';save();render()}
+function calcMockResult(){let p=mockP(),x=G.mock.current,u=UNIS[x.uid];x.score=u.subs.reduce((a,s)=>a+(p.stats[s]+x.faces[s].face)*(u.w[s]??1),0);x.passed=x.floorFails.length===0&&x.score>=u.cut}
+function mockReroll(val){if(G.screen!=='mockExam'||G.phase!=='mockRolled')return;let [s,src]=String(val).split('|'),p=mockP(),x=G.mock.current,u=UNIS[x.uid];if(!u.subs.includes(s)||x.rerolled.includes(s)||x.sourcesUsed.includes(src)||x.floorFails.length)return;
+ let sources=[];if(p.trait==='本番に強い')sources.push('本番に強い');if(has(p,'模擬試験の達人'))sources.push('模擬試験の達人');if(has(p,'赤本'))sources.push('赤本');if(!sources.includes(src))return;
+ x.faces[s].face=Math.max(x.faces[s].face,oneRoll(p,s).face);x.rerolled.push(s);x.sourcesUsed.push(src);calcMockResult();save();render()}
+function mockContinue(){if(G.screen!=='mockExam'||G.phase!=='mockRolled')return;let p=mockP(),x=G.mock.current,u=UNIS[x.uid];let result={name:u.name,points:u.points,score:x.score,cutoff:u.cut,passed:x.passed,floorFails:x.floorFails.slice()};G.mock.results.push(result);p.mockHistory.push({...result,stageRound:3});log(`${p.name}模試：${u.name} ${x.floorFails.length?'足切り未達':x.score+'/'+u.cut} → ${x.passed?'合格判定':'不合格判定'}`);G.mock.cursor++;G.mock.current=null;G.phase=G.mock.cursor>=G.mock.choices.length?'mockSummary':'mockReady';save();render()}
+function mockNextPlayer(){if(G.screen!=='mockExam'||G.phase!=='mockSummary')return;let m=G.mock;m.index++;if(m.index>=m.order.length){G.mock=null;G.screen='play';G.phase='move';G.turn=0;G.round=4;G.remaining=0;G.tutorDone=false;G.switchedRoll=false;log('全員の模試を終了。高校4ターン目に進む');save();render();return}
+ m.choices=[];m.cursor=0;m.current=null;m.results=[];G.phase='mockChoose';save();render()}
+
+function beginUniversityExam(isRonin){G.screen='uniExam';G.phase='examChoose';G.exam={ronin:isRonin,order:G.players.filter(p=>!isRonin||p.ronin).map(p=>p.id),index:0,choices:[],cursor:0,applications:[],current:null,offers:[]};
+ if(G.exam.order.length===0){finishGame();return}for(let p of G.players){p.usedConsumable=false;p.usedStage=p.usedStage.filter(x=>!x.startsWith('exam:'));}log(isRonin?'浪人後の再受験開始':'大学受験フェーズ開始');save();render()}
+function examP(){return G.players[G.exam.order[G.exam.index]]}
+function schoolP(){return G.players[G.pendingSchool.index]}
+function nextSchool(){G.pendingSchool.last=null;G.pendingSchool.index++;if(G.pendingSchool.index>=G.players.length){if(G.pendingSchool.type==='middle')startStage(2);else startStage(3);return}save();render()}
+function nextExamP(){G.exam.index++;G.exam.choices=[];G.exam.cursor=0;G.exam.applications=[];G.exam.current=null;G.exam.offers=[];G.exam.aiPlan=null;G.phase='examChoose';if(G.exam.index>=G.exam.order.length){if(!G.exam.ronin&&G.players.some(p=>p.ronin)){startStage(4);return}finishGame();return}save();render()}
+function finalScore(p){let base=p.finalPts,expect=p.edu===2&&base<14?-2:p.edu===0&&base>=15?2:0,ron=p.ronin?-2:0,repeat=p.ronin&&p.oldOffer&&p.offer===p.oldOffer?-2:0;
+ return {score:base+youthScore(p.youth)+expect+ron+repeat,base,youth:youthScore(p.youth),expect,ron,repeat}}
+function finishGame(){G.screen='results';G.phase='done';log('全プレイヤーの進路が確定しました');save();render()}
+function beginMove(){if(G.screen!=='play'||G.phase!=='move')return;let p=active();G.remaining=r(6);G.movementRoll=G.remaining;G.switchedRoll=false;
+ if(p.pending.attackMove){G.remaining=Math.max(1,G.remaining-1);p.pending.attackMove--;log(`${p.name}は「足止め」を受け、今回の移動歩数が減少`)}
+ log(`${p.name}が移動d6で${G.movementRoll}を出した（実際の歩数${G.remaining}）`);
+ if(has(p,'進路の先読み')&&!used(p,'進路の先読み')){G.phase='adjustMove';save();render();return}
+ G.phase='moving';advanceMove()}
+function moveAdjust(v){if(G.phase!=='adjustMove')return;let p=active();let n=Number(v);if(![-1,0,1].includes(n))return;if(n!==0){G.remaining=Math.max(1,G.remaining+n);markUsed(p,'進路の先読み');log(`${p.name}が進路の先読みで移動歩数を${n>0?'+1':'-1'}調整`)}G.phase='moving';advanceMove()}
+function moveOptions(){let p=active(),i=p.pos,stage=G.stage,opts=[];
+ if(stage===3&&p.board==='after'){
+  if([0,2,6].includes(i)&&!G.switchedRoll)opts.push({type:'exit',label:`学校へ戻る（${SCNAMES[p.school]}：放課後マスへ）`});
+  if(i<6)opts.push({type:'step',to:i+1,label:`放課後 ${i+2}マス目へ`});
+  return opts;
+ }
+ let map=BOARD_DATA[p.board];if(stage===3&&p.board.startsWith('high_')&&[3,9,15,20].includes(i)&&!G.switchedRoll){opts.push({type:'enter',label:'放課後ボードの1マス目へ移動'})}
+ let next=(i+1)%map.length;opts.push({type:'step',to:next,label:`${next+1}マス目へ（通常ルート）`});
+ if(stage===3&&[6,13].includes(i))opts.push({type:'step',to:(i+3)%map.length,label:`${(i+3)%map.length+1}マス目へ（近道）`});
+ return opts}
+function moveStep(op){let p=active();if(op.type==='step'){p.pos=op.to}
+ else if(op.type==='enter'){p.lastPortal=p.pos;p.board='after';p.pos=0;G.switchedRoll=true;log(`${p.name}が放課後ボードへ入った`)}
+ else if(op.type==='exit'){p.board=p.school;p.pos=p.lastPortal;G.switchedRoll=true;log(`${p.name}が${SCNAMES[p.school]}へ戻った`)}
+ G.remaining--;if(G.remaining<0)G.remaining=0;G.phase='moving';advanceMove()}
+function advanceMove(){let guard=0;while(G.remaining>0){if(guard++>100)throw Error('移動処理が停止しました');let opts=moveOptions();if(!opts.length){G.remaining=0;break}if(opts.length>1){G.pathOptions=opts;G.phase='choosePath';save();render();return}moveStepNoRender(opts[0]);}
+ if(G.remaining===0)landing();else{save();render()}}
+function moveStepNoRender(op){let p=active();if(op.type==='step')p.pos=op.to;
+ else if(op.type==='enter'){p.lastPortal=p.pos;p.board='after';p.pos=0;G.switchedRoll=true;log(`${p.name}が放課後ボードに入った`)}
+ else if(op.type==='exit'){p.board=p.school;p.pos=p.lastPortal;G.switchedRoll=true;log(`${p.name}が学校ボードに戻った`)}G.remaining--;}
+function choosePath(i){if(G.phase!=='choosePath')return;let opts=moveOptions(),op=opts[Number(i)];if(!op)return;moveStep(op)}
+function landing(){let p=active(),tile=BOARD_DATA[p.board][p.pos];G.tile=tile;G.pendingTile=tile;let text=tile.type==='study'?`${tile.k}科目学習マス`:tile.type==='youth'?'青春イベント':tile.type==='skill'?'スキルカード':tile.type==='trait'?'気質矯正':tile.type==='portal'?'放課後入口':tile.type==='exit'?'出口': '休息マス（効果なし）';
+ log(`${p.name}が${SCNAMES[p.board]} ${p.pos+1}マス目「${text}」に停止`);
+ if(tile.type==='study'){let k=Math.min(5,tile.k+(card(p,'文理横断の学習')?.stack||0));
+ if(has(p,'勉強嫌い')&&!used(p,'勉強嫌い')){k=Math.max(1,k-1);markUsed(p,'勉強嫌い');log('勉強嫌い：この学習の科目数-1')}
+ if(p.pending.coStudy){k=Math.min(5,k+1);p.pending.coStudy--;log('合同勉強会の効果：学習科目+1')}
+ G.study={k,selected:[],quiz:tile.quiz,base:tile.k,boostSub:null};G.phase='studyPick';save();render();return}
+ G.phase='eventChoice';save();render()}
+function toggleSub(value){
+ if(G.phase!=='studyPick')return;
+ let [s,mode='toggle']=String(value).split('|');if(!SUB.includes(s))return;
+ const a=G.study.selected, c=a.filter(x=>x===s).length, cap=[3,4].includes(G.stage)?2:1;
+ if(mode==='remove'||mode==='toggle'&&c>0){const j=a.lastIndexOf(s);if(j>=0)a.splice(j,1)}
+ else if(a.length<G.study.k&&c<cap){a.push(s)}
+ if(!a.includes(G.study.boostSub))G.study.boostSub=null;
+ save();render();}
+function studyBoost(s){if(G.phase!=='studyPick'||!SUB.includes(s)||!G.study.selected.includes(s))return;G.study.boostSub=s;save();render()}
+function consumeExtraStudy(){let p=active();if(G.phase!=='studyPick'||!has(p,'追加履修券')||p.usedConsumable||G.study.k>=5)return;
+ G.study.k++;takeCard(p,'追加履修券');save();render()}
+function confirmStudy(){if(G.phase!=='studyPick'||G.study.selected.length!==G.study.k||(has(active(),'青春の底力')&&active().youth>=3&&!G.study.boostSub))return;
+ let p=active(),t=G.study;if(t.quiz){let sub=pick([...new Set(t.selected)]),all=Q[sub],unused=all.map((_,i)=>i).filter(i=>!G.usedQuestions?.[sub]?.includes(i));let qid=pick(unused.length?unused:all.map((_,i)=>i));
+ if(!G.usedQuestions[sub])G.usedQuestions[sub]=[];G.usedQuestions[sub].push(qid);G.quiz={sub,question:all[qid][0],answer:all[qid][1],deadline:Date.now()+10000,revealed:false,expired:false};G.phase='quiz';save();render();startTimer();return}
+ resolveStudy(false)}
+function startTimer(){if(timer)clearInterval(timer);if(!G||G.phase!=='quiz')return;timer=setInterval(()=>{if(!G||G.phase!=='quiz'){clearInterval(timer);return}let sec=Math.max(0,Math.ceil((G.quiz.deadline-Date.now())/1000));let x=$('clock');if(x)x.textContent=`残り${sec}秒`;if(sec===0){if(!G.quiz.expired){G.quiz.expired=true;save();render()}clearInterval(timer)}},220)}
+function quizReveal(){if(G.phase!=='quiz')return;G.quiz.revealed=true;G.quiz.expired ||= Date.now()>G.quiz.deadline;if(timer)clearInterval(timer);save();render()}
+function quizDone(correct){if(G.phase!=='quiz')return;let hit=correct&&!G.quiz.expired,sub=G.quiz.sub;log(`${active().name}の${sub}フラッシュカード：${hit?'正解':'不正解・時間切れ'}`);if(hit)active().quizCorrect++;G.quiz=null;resolveStudy(hit,sub)}
+function oneRoll(p,s,delta=0){let tier=Math.min(4,Math.max(0,p.tiers[s]+delta)),face=r(SIDES[tier]);return {s,tier,face,gain:face<=2?0:face<=5?1:2}}
+function gainSubject(p,s,quiz=false){let modifier=quiz?1:0;if(p.pending.attackStudy){modifier--;p.pending.attackStudy--;log('ノート隠し：この学習ダイスを1段階弱体化')}
+ let g=oneRoll(p,s,modifier),initial=g.gain;
+ if(g.gain===0&&has(p,'効率的な勉強法')&&!used(p,'効率的な勉強法')){let retry=oneRoll(p,s,modifier);g.gain=Math.max(g.gain,retry.gain);markUsed(p,'効率的な勉強法');log(`効率的な勉強法：${s}の成長を振り直し`)}
+ if(g.gain===0&&has(p,'弱点克服')&&!used(p,'弱点克服')&&p.stats[s]===Math.min(...Object.values(p.stats))){g.gain=1;markUsed(p,'弱点克服')}
+ if(g.gain===0&&p.trait==='コツコツ型'&&!used(p,'trait')){g.gain=1;markUsed(p,'trait')}
+ if(g.gain===0&&p.trait==='気分屋'&&!used(p,'trait')){g.gain=oneRoll(p,s,modifier).gain;markUsed(p,'trait')}
+ if(g.gain<=1&&p.trait==='一夜漬け型'&&G.stage>=2&&!used(p,'trait')){g.gain=Math.max(g.gain,oneRoll(p,s,modifier).gain);markUsed(p,'trait')}
+ if(g.gain===0&&has(p,'復習ノート')&&!p.usedConsumable){g.gain=Math.max(g.gain,oneRoll(p,s,modifier).gain);takeCard(p,'復習ノート')}
+ let actual=addStat(p,s,g.gain);log(`${p.name} ${s} ${dieName(p,s,modifier)}→${g.face} 成長+${actual}${initial!==g.gain?'（スキル補正）':''}`);
+ return actual}
+function resolveStudy(correct,quizSub){let p=active(),t=G.study;let boost=(has(p,'青春の底力')&&p.youth>=3)?t.boostSub:null;for(let s of t.selected){let earned=gainSubject(p,s,!!correct&&s===quizSub);if(boost===s&&earned>0){let extra=addStat(p,s,earned);log(`${p.name}：青春の底力で${s}の成長結果を2倍（追加+${extra}）`);}}
+ if(new Set(t.selected).size>=4&&t.selected.includes('社'))p.extra.社2=true;
+ if(new Set(t.selected).size>=5&&t.selected.includes('理'))p.extra.理2=true;
+ if(p.trait==='探究型'&&new Set(t.selected).size>=4&&!used(p,'trait')){let s=[...t.selected].sort((a,b)=>p.stats[a]-p.stats[b])[0];addStat(p,s,1);markUsed(p,'trait');log('探究型：追加で'+s+'+1')}
+ G.study=null;G.phase='afterStop';save();render()}
+function eventChoice(v){if(G.phase!=='eventChoice')return;if(v==='tutor'){if(!payTutorPossible(active())||G.stage===0||G.pendingTile?.type==='youth')return;G.phase='tutorPick';G.tutorInstead=true;save();render();return}
+ if(v!=='event')return;resolveEvent(G.pendingTile);if(G.phase!=='cardReplace'&&G.phase!=='traitDraw')G.phase='afterStop';save();render()}
+function resolveEvent(tile){let p=active();if(tile.type==='youth')gainYouth(p,1);
+ else if(tile.type==='skill')drawCard(p);
+ else if(tile.type==='trait')drawTrait(p);
+ else if(tile.type==='event')log('休息マス：イベント報酬なし（塾を選ぶことは可能）');
+ else if(tile.type==='portal')log('放課後マスに停止。次の移動時に街へ進める');
+ else if(tile.type==='exit')log('放課後1マス目の出口に停止。次回の移動から学校に戻れる');
+}
+function gainYouth(p,n){if(has(p,'人見知り')&&!used(p,'人見知り')){n=Math.max(0,n-1);markUsed(p,'人見知り');log('人見知り：青春トークン-1')}
+ p.youth+=n;
+ if(has(p,'クラスの人気者')&&!used(p,'クラスの人気者')){p.youth++;markUsed(p,'クラスの人気者');log('クラスの人気者：青春トークン+1')}
+ if(p.trait==='社交的'&&!used(p,'trait')){p.youth++;markUsed(p,'trait');log('社交的：青春トークン+1')}
+ if(p.pending.coYouth){p.youth++;p.pending.coYouth--;log('文化祭の共同企画：青春トークン+1')}
+ if(n>0&&has(p,'文化祭招待券')&&!p.usedConsumable){takeCard(p,'文化祭招待券');p.youth++;log('文化祭招待券：青春トークン+1')}
+ log(`${p.name}の青春トークン：${p.youth}（現時点の青春得点${youthScore(p.youth)}）`)}
+function takeTutor(s){if(G.phase!=='tutorPick'||!SUB.includes(s))return;let p=active();if(!payTutorPossible(p))return;
+ if(has(p,'予備校優待')&&!used(p,'予備校優待')){markUsed(p,'予備校優待');log('予備校優待で無料通学')}else if(has(p,'塾の無料券')&&!p.usedConsumable){takeCard(p,'塾の無料券')}else{p.money--;log(`${p.name}は塾・予備校に資金1を支払った（残り${p.money}）`)}
+ gainSubject(p,s);G.phase='afterStop';G.tutorDone=true;save();render()}
+function requestTutor(){if(G.phase!=='afterStop'||G.tutorDone||G.stage===0||G.pendingTile?.type==='youth'||!payTutorPossible(active()))return;G.phase='tutorPick';G.tutorInstead=false;save();render()}
+function finishStop(){if(G.phase!=='afterStop')return;G.tutorDone=false;G.tutorInstead=false;nextTurn()}
+function drawTrait(p){let t=pick(Object.keys(TRAITS));G.pendingDraw={kind:'trait',name:t};G.phase='traitDraw';log(`${p.name}は気質「${t}」を引いた`)}
+function drawCard(p){let names=Object.keys(CARD_WEIGHT),got=weightedPick(names,names.map(x=>CARD_WEIGHT[x]));log(`${p.name}がスキルカード「${got}」をドロー`);
+ if(Object.prototype.hasOwnProperty.call(TRAITS,got)){G.pendingDraw={kind:'trait',name:got};G.phase='traitDraw';return}
+ if(got==='文理横断の学習'&&has(p,got)){let c=card(p,got);if(c.stack<2){c.stack++;log(`文理横断の学習が${c.stack}枚重ねに成長（学習+${c.stack}科目）`)}else log('文理横断はすでに2枚。今回のドローを破棄');return}
+ if(PERSIST.includes(got)&&has(p,got)){log('同じ永続カードは重ねられないため今回のドローを破棄');return}
+ if(NEG.includes(got)){if(p.cards.length>=2){let index=Math.floor(Math.random()*p.cards.length),old=p.cards.splice(index,1)[0];log(`デメリット強制取得：${old.name}がランダムに置き換えられた`)}p.cards.push({name:got,stack:1});return}
+ if(p.cards.length<2){p.cards.push({name:got,stack:1});return}
+ G.pendingDraw={kind:'card',name:got};G.phase='cardReplace';}
+function drawnTrait(dec){if(G.phase!=='traitDraw')return;if(dec==='yes'){let p=active(),old=p.trait;p.trait=G.pendingDraw.name;log(`${p.name}の気質が${old}→${p.trait}に入れ替わった`)}else log('気質カードを破棄した');G.pendingDraw=null;G.phase='afterStop';save();render()}
+function drawnCard(v){if(G.phase!=='cardReplace')return;let p=active(),got=G.pendingDraw.name;
+ if(v!=='skip'){let i=Number(v);if(Number.isInteger(i)&&i>=0&&i<2){let old=p.cards.splice(i,1)[0];p.cards.push({name:got,stack:1});log(`${p.name}は「${old.name}」を破棄し「${got}」を獲得`)}}
+ else log(`ドローした${got}は受け取らず破棄`);G.pendingDraw=null;G.phase='afterStop';save();render()}
+function cardStart(name){let p=(G.screen==='uniExam'?examP():active());if(!p||p.usedConsumable||!has(p,name)||!ONESHOT.includes(name))return;
+ if(!['move','afterStop','examChoose'].includes(G.phase))return;
+ if(name==='才能開花'){G.pendingCard={name,owner:p.id};G.previousPhase=G.phase;G.phase='cardRankPick';save();render();return;}
+ if(!['ノート隠し','足止め','合同勉強会','模試の情報交換','文化祭の共同企画'].includes(name))return;
+ if(G.players.length<2)return;
+ G.pendingCard={name,owner:p.id};G.previousPhase=G.phase;G.phase='cardTarget';save();render()}
+function cardRankChoose(s){if(G.phase!=='cardRankPick'||!SUB.includes(s))return;let p=G.players[G.pendingCard?.owner];if(!p||p.tiers[s]>=4||!takeCard(p,'才能開花'))return;p.tiers[s]++;log(`${p.name}の${s}の成長ダイスが${dieName(p,s)}にランクアップ`);G.phase=G.previousPhase;G.pendingCard=null;save();render()}
+function cardTarget(id){if(G.phase!=='cardTarget'||!G.pendingCard)return;let p=G.players[G.pendingCard.owner],target=G.players[Number(id)],name=G.pendingCard.name;
+ if(!target||target.id===p.id)return;
+ G.pendingCard.target=target.id;
+ if(['合同勉強会','模試の情報交換','文化祭の共同企画'].includes(name)){G.phase='cardConsent';save();render();return}
+ applyCardPair(p,target,name);G.phase=G.previousPhase;G.pendingCard=null;save();render()}
+function consentCard(accept){if(G.phase!=='cardConsent')return;let {owner,target,name}=G.pendingCard;
+ if(accept){applyCardPair(G.players[owner],G.players[target],name)}else log(`${G.players[target].name}は「${name}」の協調を断った`);
+ G.phase=G.previousPhase;G.pendingCard=null;save();render()}
+function applyCardPair(p,t,name){if(!takeCard(p,name))return;
+ if(name==='ノート隠し')t.pending.attackStudy++;
+ if(name==='足止め')t.pending.attackMove++;
+ if(name==='合同勉強会'){p.pending.coStudy++;t.pending.coStudy++}
+ if(name==='模試の情報交換'){p.pending.coExam++;t.pending.coExam++}
+ if(name==='文化祭の共同企画'){p.pending.coYouth++;t.pending.coYouth++}
+ log(`${p.name}が${t.name}を対象に「${name}」を発動`)}
+function cancelCard(){if(!['cardTarget','cardConsent','cardRankPick'].includes(G.phase))return;G.phase=G.previousPhase;G.pendingCard=null;save();render()}
+function schoolApply(kind){if(G.screen!=='schoolExam'||G.pendingSchool.last)return;let p=schoolP(),typ=G.pendingSchool.type;
+ if(typ==='middle'&&!['midpub','midpri'].includes(kind))return;
+ if(typ==='high'&&!['high_coed','high_public','high_private'].includes(kind))return;
+ if(kind==='midpub'||kind==='high_coed'){if(typ==='middle')p.middle='midpub';else p.school='high_coed';G.pendingSchool.last={kind,passed:true,default:true,score:null};log(`${p.name}は${SCNAMES[kind]}へ進学`);save();render();return}
+ if((kind==='midpri'||kind==='high_private')&&p.money<2)return;
+ const isPrivateSchool=kind==='midpri'||kind==='high_private';
+ if(isPrivateSchool){p.money-=2;log(`${p.name}：私立${typ==='middle'?'中学':'高校'}受験費用2を支払った（合否を問わず徴収）`)}
+ let subjects=typ==='middle'?['国','数','理','社']:[...SUB],faces={},score=0;
+ for(let s of subjects){faces[s]=oneRoll(p,s)}
+ // Like other exams, apply the negative card once per stage; no global 2d6.
+ if(has(p,'あがり症')&&!used(p,'あがり症')){let s=pick(subjects);faces[s]=oneRoll(p,s,-1);markUsed(p,'あがり症');log(`${p.name}の「あがり症」：${s}の入試ダイスが1段階低下`)}
+ score=subjects.reduce((a,s)=>a+p.stats[s]+faces[s].face,0);
+ let cutoff=typ==='middle'?G.schoolCut.middle:kind==='high_private'?G.schoolCut.high_private:G.schoolCut.high_public;
+ if(score<cutoff){let src=p.trait==='本番に強い'&&!used(p,'traitExam')?'traitExam':has(p,'模擬試験の達人')&&!used(p,'模擬試験の達人')?'模擬試験の達人':null;
+  if(src){let s=subjects.reduce((best,x)=>(SIDES[p.tiers[x]]-faces[x].face)> (SIDES[p.tiers[best]]-faces[best].face)?x:best,subjects[0]);let newface=oneRoll(p,s).face;faces[s].face=Math.max(faces[s].face,newface);score=subjects.reduce((a,x)=>a+p.stats[x]+faces[x].face,0);markUsed(p,src);log(`${p.name}は${src==='traitExam'?'本番に強い':src}で${s}の入試ダイスを振り直した`)}}
+ let passed=score>=cutoff;
+ const scholarship=isPrivateSchool&&passed&&score>=cutoff+(typ==='middle'?10:12);
+ if(scholarship){p.money+=2;log(`${p.name}：私立${typ==='middle'?'中学':'高校'}特待合格。受験費用2を全額返還`)}
+ if(passed){if(kind==='midpri'){p.middle=kind}else{p.school=kind}}
+ else if(typ==='middle')p.middle='midpub';else p.school='high_coed';
+ let record={kind,passed,score,cutoff,subjects,faces,scholarship,paid:isPrivateSchool?2:0,default:false};p.schoolExam.push(record);G.pendingSchool.last=record;
+ log(`${p.name}の${SCNAMES[kind]}入試：${score}点／合格ライン${cutoff}→${passed?(scholarship?'特待合格':'合格'):'不合格（公立へ）'}`);save();render()}
+function universityBlocked(p,u,nationalIndex=0){
+ if(u.cost>0)return '';
+ if(nationalIndex>=2)return '国公立の受験は最大2校まで';
+ let plus=nationalIndex===1?1:0;
+ let lacking=SUB.filter(s=>p.stats[s]<(u.min[s]??0)+plus).map(s=>`${s}${(u.min[s]??0)+plus}以上`);
+ return lacking.length?`一次足切り${plus?'（国公立2校目：+1）':''}：`+lacking.join('、'):''}
+function nationalCount(choices){return choices.filter(i=>UNIS[i].cost===0).length}
+function uniToggle(i){if(G.screen!=='uniExam'||G.phase!=='examChoose')return;let u=UNIS[Number(i)],p=examP();if(!u)return;
+ let idx=G.exam.choices.indexOf(Number(i));if(idx>=0){G.exam.choices.splice(idx,1)}
+ else{
+  if(G.exam.choices.length>=6||universityBlocked(p,u,nationalCount(G.exam.choices)))return;
+  let cost=G.exam.choices.reduce((a,j)=>a+UNIS[j].cost,0);if(cost+u.cost>p.money)return;
+  G.exam.choices.push(Number(i));
+ }save();render()}
+function uniSubmit(){if(G.screen!=='uniExam'||G.phase!=='examChoose')return;let p=examP(),a=G.exam;
+ if(a.choices.length>6||nationalCount(a.choices)>2)return;
+ let publicPos=0;
+ for(let i of a.choices){if(!UNIS[i].cost){if(universityBlocked(p,UNIS[i],publicPos))return;publicPos++}}
+ let cost=a.choices.reduce((tot,i)=>tot+UNIS[i].cost,0);if(cost>p.money)return;p.money-=cost;
+ log(`${p.name}の大学出願：${a.choices.length}校（国公立${nationalCount(a.choices)}校）、出願費用${cost}（残金${p.money}）`);
+ a.applications=[...a.choices];a.cursor=0;a.offers=[];a.current=null;
+ if(!a.applications.length){G.phase='examDecision'}else G.phase='examReady';save();render()}
+
+function uniRoll(){if(G.screen!=='uniExam'||G.phase!=='examReady')return;let p=examP(),u=UNIS[G.exam.applications[G.exam.cursor]],faces={};
+ for(let s of u.subs){faces[s]=oneRoll(p,s)}
+ if(has(p,'あがり症')&&!used(p,'あがり症')){let s=pick(u.subs);faces[s]=oneRoll(p,s,-1);markUsed(p,'あがり症');log(`あがり症：${s}の受験ダイスを1段階弱体化`)}
+ if(p.pending.coExam){let s=[...u.subs].sort((a,b)=>(u.w[b]||1)-(u.w[a]||1))[0];faces[s]=oneRoll(p,s,1);p.pending.coExam--;log('模試の情報交換：'+s+'の入試ダイスが一時的に強化')}
+ G.exam.current={uid:G.exam.applications[G.exam.cursor],faces,rerolled:[],score:0,passed:false};calculateUniResult();G.phase='examRolled';save();render()}
+function calculateUniResult(){let p=examP(),x=G.exam.current,u=UNIS[x.uid];x.score=u.subs.reduce((sum,s)=>sum+(p.stats[s]+x.faces[s].face)*(u.w[s]||1),0);x.passed=x.score>=u.cut}
+function rerollSources(p){let a=[];if(p.trait==='本番に強い'&&!used(p,'traitExam'))a.push({id:'traitExam',label:'気質・本番に強い'});
+ if(has(p,'模擬試験の達人')&&!used(p,'模擬試験の達人'))a.push({id:'模擬試験の達人',label:'模擬試験の達人'});
+ if(has(p,'赤本')&&!p.usedConsumable)a.push({id:'赤本',label:'使い切り・赤本'});return a}
+function uniReroll(s,source){if(G.screen!=='uniExam'||G.phase!=='examRolled')return;let p=examP(),x=G.exam.current,u=UNIS[x.uid];if(x.passed||!u.subs.includes(s)||x.rerolled.includes(s)||!rerollSources(p).some(q=>q.id===source))return;
+ let previous=x.faces[s].face,news=oneRoll(p,s).face;x.faces[s].face=Math.max(previous,news);x.rerolled.push(s);
+ if(source==='赤本')takeCard(p,'赤本');else markUsed(p,source);
+ calculateUniResult();log(`${p.name}は${s}を${source}で振り直し ${previous}→${x.faces[s].face}（大学得点${x.score}）`);save();render()}
+function uniContinue(){if(G.screen!=='uniExam'||G.phase!=='examRolled')return;let p=examP(),x=G.exam.current,u=UNIS[x.uid];
+ p.uniResults.push({name:u.name,points:u.points,score:x.score,cutoff:u.cut,passed:x.passed});if(x.passed)G.exam.offers.push(u);
+ log(`${p.name}：${u.name} ${x.score}/${u.cut} → ${x.passed?'合格':'不合格'}`);G.exam.cursor++;p.usedConsumable=false;
+ if(G.exam.cursor>=G.exam.applications.length){G.phase='examDecision'}else G.phase='examReady';G.exam.current=null;save();render()}
+function uniDecision(which){if(G.screen!=='uniExam'||G.phase!=='examDecision')return;let p=examP(),offers=[...G.exam.offers].sort((a,b)=>b.points-a.points),best=offers[0]||null;
+ if(which==='ronin'&&!G.exam.ronin){p.ronin=true;p.oldOffer=best?.name||null;p.offer=null;p.finalPts=0;p.youth=Math.max(0,p.youth-1);log(`${p.name}は現役合格校を放棄して浪人。減点-2、青春トークン1個没収`);nextExamP();return}
+ if(which!=='finish')return;p.offer=best?.name||null;p.finalPts=best?.points||0;log(`${p.name}は${p.offer||'進学先なし'}で進路確定（大学得点${p.finalPts}）`);nextExamP()}
+const labelTile=t=>t.type==='study'?`学習 ${t.k}科目${t.quiz?' 📋':''}`:t.type==='youth'?'青春 ♡':t.type==='skill'?'スキル ◇':t.type==='trait'?'気質 ✧':t.type==='portal'?'放課後 ⇢':t.type==='exit'?'学校へ ⇠':'休息 ·';
+function header(){return `<header class="bar"><div><strong>🎲 大学受験すごろく</strong> <span class="pill">シナリオC v1.1・AI対戦</span><div class="micro">移動d6　|　小中6ターン　|　高校・浪人重複2回　|　シナリオCの大学入試　|　模試あり</div></div><div class="row"><button class="small" data-act="help">ルール</button><button class="small" data-act="cardsInfo">カード一覧</button>${G?`<button class="small" data-act="undo" ${UNDO_STACK.length?'':'disabled'}>↶ 1手戻す</button>${G.aiMode?`<button class="small ${G.aiPaused?'green':''}" data-act="aiPause">${G.aiPaused?'▶ AI再開':'⏸ AI一時停止'}</button><button class="small" data-act="aiSpeed">AI：${G.aiSpeed==='slow'?'通常':'高速'}</button>`:''}<button class="small" data-act="settings">保存・調整</button><button class="small" data-act="new">新規ゲーム</button>`:''}</div></header>`}
+function renderSetup(){return `<section class="panel"><h2>ゲーム設定</h2><p><strong>上級AI3人との対戦</strong>を選ぶと、あなたがプレイヤー1を操作し、残り3人は自動で進みます。従来の1〜4人手動モードも選択できます。オフライン動作です。</p><div class="setup-row"><label>プレイ形式<select id="setupOpponent"><option value="ai" ${SETUP.aiMode?'selected':''}>🤖 1人 vs 上級AI 3人</option><option value="manual" ${!SETUP.aiMode?'selected':''}>👥 1〜4人を手動操作</option></select></label><label>プレイヤー数<select id="setupCount" ${SETUP.aiMode?'disabled':''}>${[1,2,3,4].map(n=>`<option value="${n}" ${n===(SETUP.aiMode?4:SETUP.count)?'selected':''}>${n}人</option>`).join('')}</select></label><label>開始地点<select id="setupQuick"><option value="false" ${!SETUP.quick?'selected':''}>未就学児から（全ステージ）</option><option value="true" ${SETUP.quick?'selected':''}>高校から（操作確認用の簡易初期値）</option></select></label></div><div class="setup-row" style="margin-top:10px">${Array.from({length:SETUP.aiMode?1:SETUP.count},(_,i)=>`<label class="namefield">${SETUP.aiMode?'あなたの名前':`プレイヤー${i+1}の名前`}<input type="text" id="name${i}" maxlength="18" value="${e(SETUP.names[i])}" /></label>`).join('')}</div>${SETUP.aiMode?`<div class="ai-preview"><h3>対戦相手（全員上級AI）</h3><p><strong>AI① 私立重点：</strong>得意科目3つを伸ばし、効率的な私立併願を狙う</p><p><strong>AI② 国立挑戦：</strong>多科目育成を重視し、条件を見て私立へ切り替える</p><p><strong>AI③ 柔軟型：</strong>青春・模試・合格確率を見ながら行動を調整する</p></div>`:''}<div class="row" style="margin-top:16px"><button class="primary" data-act="start">${SETUP.aiMode?'上級AI3人と対戦開始':'ゲーム開始'}</button>${hasSavedGame()?'<button data-act="resume">前回のゲームを再開</button>':''}</div><div class="notice warn"><strong>テストプレイ用のAI</strong><div class="micro">シナリオCの81大学の合格条件を利用し、期待得点・合格確率の近似で行動します。未来のサイコロの出目は参照しません。既存の手動プレイ・1手戻す・保存機能も利用できます。</div></div></section>`}
+
+function avatar(p){return `<span class="avatar p${p.id+1}" title="${e(p.name)}">${p.id+1}</span>`}
+function boardTiles(boardName){let arr=BOARD_DATA[boardName],activeP=G.screen==='play'?active():null;
+ return `<div class="board" data-board="${e(boardName)}">${arr.map((t,i)=>{let occupants=G.players.filter(p=>p.board===boardName&&p.pos===i&& (G.stage!==4||p.ronin));return `<div class="tile ${t.type}${activeP?.board===boardName&&activeP.pos===i?' current':''}" title="${e(labelTile(t))}"><span class="num">${i+1}${[6,13].includes(i)&&boardName.startsWith('high_')?' ◇':''}</span><span class="name">${e(labelTile(t))}</span><span class="players">${occupants.map(avatar).join('')}</span></div>`}).join('')}</div>`}
+function subjectInfo(p){return `<div class="readout">${SUB.map(s=>`<div><div class="micro">${s}</div><strong>${p.stats[s]}</strong><div class="micro">${dieName(p,s)}</div></div>`).join('')}</div>`}
+function skillSlots(p){return `<div class="cards">${[0,1].map(i=>{let a=p.cards[i];return `<div class="cardinfo ${a&&NEG.includes(a.name)?'negative':a&&ONESHOT.includes(a.name)?'consumable':''}">${a?`<strong>${e(a.name)} ${a.stack>1?'×'+a.stack:''}</strong><div class="micro">${e(CARD_DESC[a.name])}</div>`:`<strong>空きスキル枠 ${i+1}</strong><div class="micro">カードをドローすると使える</div>`}</div>`}).join('')}</div><p class="micro">気質専用枠：<strong>${e(p.trait)}</strong> — ${e(TRAITS[p.trait])}</p>`}
+function playerPanel(p,compact=false){return `<section class="panel"><div class="titleline"><h2>${avatar(p)} ${e(p.name)} ${compact?'':'のステータス'}</h2><span class="pill">予算 ${p.money} / 青春 ${p.youth}個（${youthScore(p.youth)}点）</span></div>${subjectInfo(p)}<div class="micro" style="margin-top:8px">家庭：${['両親非大卒','親1人が大卒','両親大卒'][p.edu]} ／ ${['低','中','高'][p.income]}所得 ／ 得意${p.gift}・苦手${p.weak}</div>${compact?'':`<hr class="sep"><h3>カード</h3>${skillSlots(p)}`} </section>`}
+function moveCards(p){if(G.screen!=='play'||!['move','afterStop'].includes(G.phase))return '';
+ let eligible=p.cards.filter(c=>['ノート隠し','足止め','合同勉強会','模試の情報交換','文化祭の共同企画','才能開花'].includes(c.name));
+ return eligible.length?`<div class="route-note"><div class="mini-label">使い切りカード（1ターン1枚まで）</div><div class="choice">${eligible.map(c=>`<button class="small" data-act="cardStart" data-val="${e(c.name)}" ${p.usedConsumable||(G.players.length<=1&&c.name!=='才能開花')?'disabled':''}>${e(c.name)}</button>`).join('')}</div></div>`:''}
+function playControls(){let p=active();if(G.phase==='move')return `<div class="notice"><strong>${p.ai?'🤖 上級AI：':''}${e(p.name)}の番です。</strong> 移動d6を振ります。${moveCards(p)}<button class="primary wide" data-act="roll">🎲 移動ダイスを振る</button></div>`;
+ if(G.phase==='adjustMove')return `<div class="notice">移動出目：<strong>${G.remaining}</strong>。永続カード「進路の先読み」を使えます。<div class="choice"><button data-act="adjust" data-val="-1">−1に変更</button><button data-act="adjust" data-val="0">変更しない</button><button data-act="adjust" data-val="1">＋1に変更</button></div></div>`;
+ if(G.phase==='choosePath')return `<div class="notice"><strong>残り${G.remaining}歩。進む方向を選択してください。</strong><div class="stack" style="margin-top:9px">${moveOptions().map((op,i)=>`<button class="path-btn" data-act="path" data-val="${i}">${e(op.label)}</button>`).join('')}</div><p class="micro">この移動ロールではボード間の往復はできません。</p></div>`;
+ if(G.phase==='studyPick'){let t=G.study,boostEnabled=has(p,'青春の底力')&&p.youth>=3;return `<div class="notice"><h3>${t.k}回分の学習を割り当ててください（${t.selected.length}/${t.k}）</h3><p class="micro">${[3,4].includes(G.stage)?'高校・浪人では同じ科目を2回まで選択可能。':'小中学校では各科目を1回ずつ学習。'} 各学習ダイスは独立に振ります。</p><div class="stack">${SUB.map(s=>{let c=t.selected.filter(x=>x===s).length,max=[3,4].includes(G.stage)?2:1;return `<div class="statline"><strong>${s}</strong><span>${dieName(p,s)}／能力${p.stats[s]}</span><span>選択${c}回</span><button class="small" data-act="toggleSub" data-val="${s}|remove" ${c===0?'disabled':''}>−</button><button class="small" data-act="toggleSub" data-val="${s}|add" ${c>=max||t.selected.length>=t.k?'disabled':''}>＋</button></div>`}).join('')}</div>${boostEnabled?`<div class="route-note"><strong>青春の底力：成長2倍の対象を選択</strong><p class="micro">青春トークン3個以上で各学習マスに常時発動。選択した1科目の学習結果をすべて2倍にします（能力値上限20）。</p><div class="chips">${[...new Set(t.selected)].map(s=>`<button class="${t.boostSub===s?'selected':''}" data-act="studyBoost" data-val="${s}">${s}${t.boostSub===s?' ✓':''}</button>`).join('')}</div></div>`:''}${t.quiz?'<p class="micro">フラッシュカード付き：学習する科目からランダムに1科目を出題します。</p>':''}<div class="row" style="margin-top:12px">${has(p,'追加履修券')&&!p.usedConsumable&&t.k<5?'<button data-act="extraStudy">追加履修券で+1回</button>':''}<button class="primary" data-act="studyConfirm" ${t.selected.length!==t.k||boostEnabled&&!t.boostSub?'disabled':''}>成長ダイスを振る</button></div></div>`}
+ if(G.phase==='quiz'){let q=G.quiz,expired=q.expired||Date.now()>q.deadline;return `<div class="notice"><h3>📋 ${q.sub} フラッシュカード <span id="clock" class="pill">残り${Math.max(0,Math.ceil((q.deadline-Date.now())/1000))}秒</span></h3><p style="font-size:17px">${e(q.question)}</p>${q.revealed?`<strong>正答：${e(q.answer)}</strong><div class="choice" style="margin-top:10px"><button class="green" data-act="quizDone" data-val="yes" ${expired?'disabled':''}>正解だった</button><button data-act="quizDone" data-val="no">不正解／時間切れ</button></div>`:`<p class="micro">口頭・頭の中で回答し、制限時間内に解答を表示してください。</p><button class="primary" data-act="quizReveal">解答を表示</button>`}</div>`}
+ if(G.phase==='eventChoice'){let tile=G.pendingTile,desc=labelTile(tile);return `<div class="notice"><h3>${e(desc)}に停止しました</h3><p class="micro">${tile.type==='youth'?'青春イベントでは塾・予備校は利用できません。':tile.type==='event'?'このマスは休息（効果なし）です。資金があれば代わりに塾・予備校を利用できます。':'マスの効果を処理するか、効果を放棄して塾・予備校を利用します。'}</p><div class="choice"><button class="primary" data-act="eventChoice" data-val="event">${tile.type==='event'?'休息して次へ':'マスの効果を処理'}</button>${G.stage!==0&&tile.type!=='youth'&&payTutorPossible(p)?'<button data-act="eventChoice" data-val="tutor">塾・予備校を利用</button>':''}</div></div>`}
+ if(G.phase==='traitDraw')return `<div class="notice"><h3>気質カードをドロー</h3><p>現在：<strong>${e(p.trait)}</strong>　→　ドロー：<strong>${e(G.pendingDraw.name)}</strong></p><p class="micro">${e(TRAITS[G.pendingDraw.name])}</p><div class="choice"><button class="primary" data-act="traitDraw" data-val="yes">気質を入れ替える</button><button data-act="traitDraw" data-val="no">破棄して現状維持</button></div></div>`;
+ if(G.phase==='cardReplace')return `<div class="notice"><h3>通常2枠が埋まっています</h3><p>新カード：<strong>${e(G.pendingDraw.name)}</strong> — ${e(CARD_DESC[G.pendingDraw.name])}</p><p class="micro">既存カードの1枚を破棄して入れ替えるか、今回引いたカードを破棄します。カードを引かずに永続カードを捨てることはできません。</p><div class="stack">${p.cards.map((c,i)=>`<button data-act="cardReplace" data-val="${i}">「${e(c.name)}」を破棄して取得</button>`).join('')}<button data-act="cardReplace" data-val="skip">新カードを捨てる</button></div></div>`;
+ if(G.phase==='cardRankPick')return `<div class="notice"><h3>才能開花：強化する科目を選んでください</h3><p class="micro">使い切りカードを1枚消費し、選んだ科目の成長ダイスを恒久的に1ランク上げます。</p><div class="choice">${SUB.map(s=>`<button data-act="cardRank" data-val="${s}" ${p.tiers[s]>=4?'disabled':''}>${s} ${dieName(p,s)} → ${p.tiers[s]<4?'d'+SIDES[p.tiers[s]+1]:'上限'}</button>`).join('')}</div><button class="small" data-act="cancelCard">キャンセル</button></div>`;
+ if(G.phase==='cardTarget')return `<div class="notice"><h3>${e(G.pendingCard.name)}の対象プレイヤーを選択</h3><div class="choice">${G.players.filter(x=>x.id!==G.pendingCard.owner).map(x=>`<button data-act="cardTarget" data-val="${x.id}">${e(x.name)}</button>`).join('')}</div><button class="small" data-act="cancelCard">キャンセル</button></div>`;
+ if(G.phase==='cardConsent')return `<div class="notice"><h3>協調カード：相手の同意が必要です</h3><p>${e(G.players[G.pendingCard.target].name)}さん、「${e(G.pendingCard.name)}」の協力を受け入れますか？</p><div class="choice"><button class="green" data-act="consent" data-val="yes">同意する</button><button data-act="consent" data-val="no">断る</button></div></div>`;
+ if(G.phase==='tutorPick')return `<div class="notice"><h3>塾・予備校：任意の1科目を育成</h3><p class="micro">通常は資金1を消費。予備校優待や塾の無料券が有効なら無料です。</p><div class="choice">${SUB.map(s=>`<button data-act="tutorSub" data-val="${s}">${s}／${dieName(p,s)}／能力${p.stats[s]}</button>`).join('')}</div></div>`;
+ if(G.phase==='afterStop')return `<div class="notice"><strong>マスの処理が終了しました。</strong>${moveCards(p)}<div class="choice" style="margin-top:9px">${!G.tutorDone&&G.stage!==0&&G.pendingTile?.type!=='youth'&&payTutorPossible(p)?'<button data-act="requestTutor">塾・予備校（1科目／資金1）</button>':''}<button class="primary" data-act="endTurn">次のプレイヤー／ターンへ</button></div></div>`;
+ return `<div class="notice">処理を確認してください。</div>`}
+function renderPlay(){let p=active(),show=G.viewBoard&&BOARD_DATA[G.viewBoard]?G.viewBoard:p.board;return `<div class="row between" style="margin:8px 0 15px"><div><h2 class="section-title">${STAGENAMES[G.stage]}　第${G.round}/${STAGETURNS[G.stage]}ターン</h2><div class="micro">現在の手番：${e(p.name)}　／　${G.turn+1}/${G.order.length}人　／　${G.phase==='choosePath'?'残り移動'+G.remaining+'歩':'移動d6'}</div></div><span class="pill">高校6ターン固定</span></div>${G.aiMode?`<div class="notice ${G.aiPaused?'warn':''}">${G.aiPaused?'⏸ AIの自動進行を停止中です。再開ボタンで続けます。':aiCurrentActor()?.ai?'🤖 上級AIが自動操作中です。あなたの番になると停止します。':'👤 あなたの手番です。AI3人は自動で行動します。'}${G.aiError?`<p class="failure">${e(G.aiError)}</p>`:''}</div>`:''}<div class="grid"><div><section class="panel"><div class="row between"><h2>盤面：${SCNAMES[show]}</h2><select id="boardView"><option value="">現在地を表示</option>${Object.keys(BOARD_DATA).map(k=>`<option value="${k}" ${show===k&&G.viewBoard===k?'selected':''}>${SCNAMES[k]}</option>`).join('')}</select></div>${boardTiles(show)}<p class="micro" style="margin:10px 0 0">青枠は手番プレイヤーの現在地。学校ボードの◇印では近道を選択できます。高校の放課後入口で残りの歩数を使って共通ボードへ移動可能。</p></section><section class="panel"><h2>ゲーム進行</h2>${playControls()}</section><section class="panel"><h2>直近の履歴</h2>${historyBox()}</section></div><div>${playerPanel(p)}<section class="panel"><h2>ほかのプレイヤー</h2>${G.players.filter(x=>x.id!==p.id).map(x=>`<div class="statline">${avatar(x)}<span>${x.ai?'🤖 ':''}${e(x.name)}${x.aiReason?`<small class="ai-reason">${e(x.aiReason)}</small>`:''}</span><span>学力合計${SUB.reduce((a,s)=>a+x.stats[s],0)}／青春${x.youth}</span></div>`).join('')||'<p class="micro">1人プレイ中です。</p>'}</section></div></div>`}
+function historyBox(){return `<div class="log">${(G.history||[]).slice(0,24).map(x=>`<p><span class="muted">${e(x.when)}：</span>${e(x.msg)}</p>`).join('')}</div>`}
+function renderRank(){let p=G.players[G.rankQueue[0]];return `<section class="panel"><h2>成長ダイスのランクアップ</h2><p>${e(p.name)}は今ステージの強化抽選に成功しました。ランクアップする科目を1つ選んでください。</p>${playerPanel(p,true)}<div class="choice">${SUB.map(s=>`<button data-act="rank" data-val="${s}" ${p.tiers[s]>=4?'disabled':''}>${s} ${dieName(p,s)}→${p.tiers[s]>=4?'上限':`d${SIDES[p.tiers[s]+1]}`}</button>`).join('')}</div><p class="micro">この画面は旧仕様のため通常は表示されません。</p></section>`}
+function renderSchoolExam(){let v=G.pendingSchool,p=schoolP();if(!p)return '';
+ let middle=v.type==='middle';return `<section class="panel"><h2>${middle?'中学受験':'高校受験'}：${e(p.name)}</h2><div class="notice">${middle?'国語・数学・理科・社会の4科目':'国語・数学・英語・理科・社会の5科目'}について、<strong>能力値＋各科目の成長ダイスの出目</strong>を合計して合格を判定します。出願時点の能力値はそのまま、ダイスは1回ずつ独立に振ります。</div>${playerPanel(p,true)}<hr class="sep">${v.last?`<h3>${e(SCNAMES[v.last.kind])}の結果</h3>${v.last.default?'<p>公立の一般校へ進学（入試不要）。</p>':`<p class="${v.last.passed?'success':'failure'}"><strong>${v.last.scholarship?'特待合格':v.last.passed?'合格':'不合格'}</strong>／合計${v.last.score}点・合格ライン${v.last.cutoff}${v.last.paid?`／受験費用2（${v.last.scholarship?'特待により全額返還':'返金なし'}）`:''}</p>${examFaces(p,v.last.subjects,v.last.faces)}` }<p>進学先：<strong>${SCNAMES[middle?p.middle:p.school]}</strong></p><button class="primary" data-act="schoolNext">次のプレイヤーへ</button>`:
+ `<h3>受験先を選択</h3><div class="choice">${middle?`<button data-act="schoolApply" data-val="midpub">公立中学校（無試験）</button><button data-act="schoolApply" data-val="midpri" ${p.money<2?'disabled':''}>私立中学校（合格${G.schoolCut.middle}・特待${G.schoolCut.middle+10}／受験時に資金2）</button>`:`<button data-act="schoolApply" data-val="high_coed">公立共学校（無試験）</button><button data-act="schoolApply" data-val="high_public">公立進学校（ライン${G.schoolCut.high_public}／無料）</button><button data-act="schoolApply" data-val="high_private" ${p.money<2?'disabled':''}>私立進学校（合格${G.schoolCut.high_private}・特待${G.schoolCut.high_private+12}／受験時に資金2）</button>`}</div><p class="micro">入試難度の数値は、合計点方式への移行に伴う暫定値です。私立学校の受験費用は不合格でも返還されません。中学はライン+10、高校は+12で特待となり全額返還されます。</p>`}</section>`}
+function examFaces(p,subjects,faces,w={}){return `<div class="scroll-x"><table class="uni-table"><thead><tr><th>科目</th><th>能力値</th><th>ダイス</th><th>出目</th><th>配点係数</th><th>得点</th></tr></thead><tbody>${subjects.map(s=>`<tr><td>${s}</td><td>${p.stats[s]}</td><td>d${SIDES[faces[s].tier]}</td><td>${faces[s].face}</td><td>×${w[s]||1}</td><td>${(p.stats[s]+faces[s].face)*(w[s]||1)}</td></tr>`).join('')}</tbody></table></div>`}
+
+function renderMockExam(){
+ let m=G.mock,p=mockP(),selected=m.choices,filter=m.filter||'all',query=(m.search||'').trim().toLowerCase(),filtered=UNIS.map((u,i)=>({u,i})).filter(({u,i})=>(filter==='all'||filter==='national'&&u.cost===0||filter==='private'&&u.cost===1||filter==='high'&&u.points>=15||filter==='selected'&&selected.includes(i))&&(!query||u.name.toLowerCase().includes(query)));
+ let intro=`<div class="row between" style="margin-bottom:12px"><h2 class="section-title">高校3ターン目・模試：${e(p.name)}</h2><span class="pill">3校まで／無料／本番に影響なし</span></div>`;
+ if(G.phase==='mockChoose')return intro+`<section class="panel"><p class="notice">実際の大学と同じ二次ライン・傾斜配点・一次足切りで仮判定します。足切り未達の大学も選べます。模試では国公立も最大3校選択できます。1校目は通常の足切り、2・3校目は本番の国立2校目と同様に足切り+1です。資金・カード・出願枠・発動回数は一切変わりません。</p>${playerPanel(p,true)}<h3>模試の対象を選ぶ（${selected.length}/3校）</h3><div class="row uni-filters"><label>区分 <select id="mockFilter">${[['all','全大学'],['national','国公立'],['private','私立'],['high','15点以上'],['selected','選択中']].map(([v,n])=>`<option value="${v}" ${filter===v?'selected':''}>${n}</option>`).join('')}</select></label><label>検索 <input id="mockSearch" value="${e(m.search||'')}" placeholder="大学・学部名"/></label><span class="micro">${filtered.length}件</span></div><div class="scroll-x uni-desktop"><table class="uni-table"><thead><tr><th>選択</th><th>大学</th><th>大学点</th><th>二次科目・配点</th><th>一次足切り</th><th>合格ライン</th></tr></thead><tbody>${filtered.map(({u,i})=>{let yes=selected.includes(i),np=yes?selected.slice(0,selected.indexOf(i)).filter(j=>UNIS[j].cost===0).length:nationalCount(selected);return `<tr><td><button class="small ${yes?'primary':''}" data-act="mockToggle" data-val="${i}" ${!yes&&selected.length>=3?'disabled':''}>${yes?'取消':'選択'}</button></td><td>${e(u.name)}</td><td>${u.points}</td><td>${u.subs.map(s=>s+'×'+(u.w[s]??1)).join('・')}</td><td>${u.cost?'なし':floorText(u,np>=1?1:0)}</td><td>${u.cut}</td></tr>`}).join('')}</tbody></table></div><div class="unilist-cards">${filtered.map(({u,i})=>{let yes=selected.includes(i),np=yes?selected.slice(0,selected.indexOf(i)).filter(j=>UNIS[j].cost===0).length:nationalCount(selected);return `<div class="uni-card"><div class="row between"><strong>${e(u.name)}</strong><span class="pill">${u.points}点</span></div><div class="micro">${u.cost?'私立':'国公立'}／科目：${u.subs.map(s=>s+'×'+(u.w[s]??1)).join('・')}</div><div class="micro">${u.cost?'足切りなし':floorText(u,np>=1?1:0)}　｜　二次ライン${u.cut}</div><button class="small ${yes?'primary':''}" data-act="mockToggle" data-val="${i}" ${!yes&&selected.length>=3?'disabled':''}>${yes?'選択を取り消す':'模試で受ける'}</button></div>`}).join('')}</div><div class="route-note">選択校：${selected.map(i=>`<span class="pill">${e(UNIS[i].name)}</span>`).join('')||'なし'}</div><button class="primary" data-act="mockSubmit">${selected.length?'選択した3校以内を模試受験':'模試を受けずに進む'}</button></section>`;
+ if(G.phase==='mockReady'){let u=UNIS[m.choices[m.cursor]];return intro+`<section class="panel"><h3>模試 ${m.cursor+1}/${m.choices.length}校：${e(u.name)}</h3><p>必要科目：${u.subs.join('・')}／合格ライン${u.cut}</p><button class="primary" data-act="mockRoll">模試のダイスを振る</button></section>`}
+ if(G.phase==='mockRolled'){let x=m.current,u=UNIS[x.uid],src=[];if(p.trait==='本番に強い')src.push('本番に強い');if(has(p,'模擬試験の達人'))src.push('模擬試験の達人');if(has(p,'赤本'))src.push('赤本');let eligible=src.filter(s=>!x.sourcesUsed.includes(s));return intro+`<section class="panel"><h3>${e(u.name)}：${x.floorFails.length?'<span class="failure">一次足切り未達</span>':x.passed?'<span class="success">合格判定</span>':'<span class="failure">不合格判定</span>'}</h3>${x.floorFails.length?`<p class="failure">未達科目：${x.floorFails.join('・')}（模試のみ。本番の出願には影響しません）</p>`:''}<p class="result-score">${x.score} <span class="micro">/ ライン ${u.cut}　差 ${Number((x.score-u.cut).toFixed(1))>=0?'+':''}${Number((x.score-u.cut).toFixed(1))}</span></p>${examFaces(p,u.subs,x.faces,u.w)}${!x.floorFails.length&&eligible.length?`<div class="notice"><strong>スキルの仮使用（消費・発動回数なし）</strong><div class="stack">${eligible.map(src=>`<div class="row"><span class="pill">${src}</span>${u.subs.filter(s=>!x.rerolled.includes(s)).map(s=>`<button class="small" data-act="mockReroll" data-val="${s}|${src}">${s}を振り直す</button>`).join('')}</div>`).join('')}</div></div>`:''}<button class="primary" data-act="mockContinue">結果を記録して次へ</button></section>`}
+ if(G.phase==='mockSummary')return intro+`<section class="panel"><h3>模試の成績表</h3>${m.results.length?`<div class="scroll-x"><table class="uni-table"><thead><tr><th>大学</th><th>判定</th><th>得点／合格ライン</th><th>差</th></tr></thead><tbody>${m.results.map(x=>`<tr><td>${e(x.name)}</td><td>${x.floorFails.length?'足切り未達':x.passed?'合格判定':'不合格判定'}</td><td>${x.score}／${x.cutoff}</td><td>${Number((x.score-x.cutoff).toFixed(1))}</td></tr>`).join('')}</tbody></table></div>`:'<p>模試を受けませんでした。</p>'}<p class="micro">結果は履歴に保存します。模試の合否は本番とは無関係で、ここで使ったダイス・カードは本番で改めて判定します。</p><button class="primary" data-act="mockNext">${m.index+1<m.order.length?'次のプレイヤーの模試へ':'高校4ターン目へ'}</button></section>`;
+ return intro;
+}
+
+function renderUniExam(){let p=examP(),x=G.exam,u=x?.current?UNIS[x.current.uid]:null,choices=x.choices;
+ let filter=G.uniFilter||'all',query=(G.uniSearch||'').trim().toLowerCase(),filtered=UNIS.map((u,i)=>({u,i})).filter(({u,i})=>(filter==='all'||filter==='national'&&u.cost===0||filter==='private'&&u.cost===1||filter==='selected'&&choices.includes(i)||filter==='high'&&u.points>=15||filter==='mid'&&u.points>=11&&u.points<=14||filter==='low'&&u.points<=10)&&(!query||u.name.toLowerCase().includes(query)));
+ let intro=`<div class="row between" style="margin-bottom:12px"><h2 class="section-title">${x.ronin?'浪人後の':'現役'}大学受験：${e(p.name)}</h2><span class="pill">資金${p.money}／出願最大6校／国公立2校</span></div>`;
+ if(G.phase==='examChoose'){return intro+`<section class="panel"><p>出願は最大6校（うち国公立は最大2校）。国公立2校目は全5科目の一次足切り+1。出願順に国公立の1校目・2校目を判定します。私立は足切りなし。合格ラインは試作用です。出願なしでも進めます。</p>${playerPanel(p,true)}<div class="route-note">出願校：${choices.length}/6校（国公立${nationalCount(choices)}/2校）／費用合計${choices.reduce((a,i)=>a+UNIS[i].cost,0)}　${choices.map(i=>`<span class="pill">${e(UNIS[i].name)}</span>`).join('')}</div><div class="row uni-filters"><label>大学を絞り込む <select id="uniFilter">${[['all','全大学'],['national','国公立'],['private','私立'],['high','15点以上'],['mid','11〜14点'],['low','10点以下'],['selected','選択中']].map(([v,label])=>`<option value="${v}" ${filter===v?'selected':''}>${label}</option>`).join('')}</select></label><label>大学名を検索 <input type="text" id="uniSearch" placeholder="例：慶應、筑波" value="${e(G.uniSearch||'')}" /></label><span class="micro">${filtered.length}校表示</span></div><div class="scroll-x uni-desktop"><table class="uni-table"><thead><tr><th>出願</th><th>大学</th><th>得点</th><th>科目</th><th>一次足切り（国公立のみ）</th><th>配点</th><th>合格ライン</th><th>費用</th></tr></thead><tbody>${filtered.map(({u,i})=>{let selected=choices.includes(i),nationalIndex=selected?choices.slice(0,choices.indexOf(i)).filter(j=>!UNIS[j].cost).length:nationalCount(choices),block=universityBlocked(p,u,nationalIndex),cost=choices.reduce((a,j)=>a+UNIS[j].cost,0);return `<tr class="${block?'blocked':''}"><td><button class="small ${selected?'primary':''}" data-act="uniToggle" data-val="${i}" ${!selected&&(block||choices.length>=6||p.money<cost+u.cost)?'disabled':''}>${selected?'選択中':'選択'}</button></td><td>${e(u.name)}${block?`<div class="failure micro">${e(block)}</div>`:''}</td><td>${u.points}</td><td>${u.subs.join('')}</td><td>${u.cost?'なし':floorText(u,nationalIndex===1?1:0)+(nationalIndex===1?'（2校目）':'')}</td><td>${Object.entries(u.w).map(([s,n])=>s+'×'+n).join(' ')||'各1倍'}</td><td>${u.cut}</td><td>${u.cost}</td></tr>`}).join('')}</tbody></table></div><div class="unilist-cards">${filtered.map(({u,i})=>{let selected=choices.includes(i),nationalIndex=selected?choices.slice(0,choices.indexOf(i)).filter(j=>!UNIS[j].cost).length:nationalCount(choices),block=universityBlocked(p,u,nationalIndex),cost=choices.reduce((a,j)=>a+UNIS[j].cost,0);return `<div class="uni-card"><div class="row between"><strong>${e(u.name)}</strong><span class="pill">${u.points}点</span></div><div class="micro">${u.cost?'私立（出願費用1）':'国公立（出願無料）'}　｜　判定：${u.subs.join('・')}　｜　二次ライン${u.cut}</div><div class="micro">${Object.entries(u.w).length?Object.entries(u.w).map(([s,n])=>s+'×'+n).join('・'):'全科目1倍'}　｜　${u.cost?'足切りなし':'一次：'+floorText(u,nationalIndex===1?1:0)}</div>${block?`<div class="failure micro">${e(block)}</div>`:''}<button class="small ${selected?'primary':''}" data-act="uniToggle" data-val="${i}" ${!selected&&(block||choices.length>=6||p.money<cost+u.cost)?'disabled':''}>${selected?'選択を取り消す':'この大学を選択する'}</button></div>`}).join('')}</div>${moveCards(p)}<div class="row" style="margin-top:14px"><button class="primary" data-act="uniSubmit">${choices.length?'選んだ大学に出願する':'出願せず進路決定へ'}</button></div></section>`}
+ if(G.phase==='cardTarget'||G.phase==='cardConsent')return intro+`<section class="panel">${G.phase==='cardTarget'?`<h2>${e(G.pendingCard.name)}の対象を選択</h2><div class="choice">${G.players.filter(q=>q.id!==p.id).map(q=>`<button data-act="cardTarget" data-val="${q.id}">${e(q.name)}</button>`).join('')}</div>`:`<h2>協調への同意</h2><p>${e(G.players[G.pendingCard.target].name)}は「${e(G.pendingCard.name)}」に同意しますか？</p><div class="choice"><button data-act="consent" data-val="yes">同意</button><button data-act="consent" data-val="no">断る</button></div>`}<button data-act="cancelCard">キャンセル</button></section>`;
+ if(G.phase==='examReady'){let u=UNIS[x.applications[x.cursor]];return intro+`<section class="panel"><h2>第${x.cursor+1}/${x.applications.length}校：${e(u.name)}</h2><p>受験科目：${u.subs.join('・')}／合格ライン${u.cut}／入試得点は科目別の能力値とダイスの合計（傾斜あり）です。</p><button class="primary" data-act="uniRoll">受験ダイスを振る</button></section>`}
+ if(G.phase==='examRolled'){let cur=x.current,opts=rerollSources(p);return intro+`<section class="panel"><h2>${e(u.name)} — ${cur.passed?'<span class="success">合格</span>':'<span class="failure">不合格判定</span>'}</h2><p class="result-score">${cur.score} <span class="micro">/ 合格ライン ${u.cut}</span></p>${examFaces(p,u.subs,cur.faces,u.w)}${!cur.passed&&opts.length?`<div class="notice"><h3>科目別ダイスを振り直す</h3><p class="micro">1大学内で同じ科目は最大1回まで。振り直し前後で大きい出目を採用します。</p><div class="stack">${opts.map(src=>`<div class="row"><span class="pill">${src.label}</span>${u.subs.filter(s=>!cur.rerolled.includes(s)).map(s=>`<button class="small" data-act="uniReroll" data-val="${s}|${src.id}">${s}を振り直す</button>`).join('')}</div>`).join('')}</div></div>`:''}<button class="primary" data-act="uniContinue">判定を確定して次へ</button></section>`}
+ if(G.phase==='examDecision'){let offers=[...x.offers].sort((a,b)=>b.points-a.points);return intro+`<section class="panel"><h2>大学受験の結果</h2>${x.applications.length?`<p>合格：${offers.length}校／出願：${x.applications.length}校</p><div class="stack">${x.applications.map(i=>{let u=UNIS[i],r=p.uniResults.filter(z=>z.name===u.name).slice(-1)[0];return `<div class="statline"><span>${e(u.name)}</span><strong class="${r?.passed?'success':'failure'}">${r?.passed?'合格':'不合格'}</strong></div>`}).join('')}</div>`:'<p>出願は行いませんでした。</p>'}<p>進学する場合：<strong>${e(offers[0]?.name||'進学先なし')}</strong>（大学得点${offers[0]?.points||0}）</p><div class="choice"><button class="primary" data-act="uniDecision" data-val="finish">${x.ronin?'再受験の結果を確定':'進学／ゲーム終了を確定'}</button>${!x.ronin?'<button data-act="uniDecision" data-val="ronin">現役合格をすべて放棄して浪人</button>':''}</div><p class="micro">浪人を選ぶと現役合格校は保持できず、青春トークン1個を没収し、最終得点から2点減点します。浪人後に同じ大学へ再合格して進学するとさらに2点減点します。</p></section>`}
+ return intro+`<section class="panel">受験処理中</section>`}
+function renderResults(){let scored=G.players.map(p=>({...finalScore(p),p})).sort((a,b)=>b.score-a.score);let prev=null,rank=0;return `<section class="panel"><h2>ゲーム終了・最終順位</h2><div class="stack">${scored.map((x,i)=>{if(prev!==x.score){rank=i+1;prev=x.score}return `<div class="panel" style="background:#f9fbff;margin:0"><div class="row between"><strong style="font-size:19px">${rank}位　${e(x.p.name)}</strong><span class="result-score">${x.score}点</span></div><p>進学先：<strong>${e(x.p.offer||'進学先なし')}</strong>　${x.p.ronin?'<span class="pill">浪人</span>':''}</p><p class="micro">大学${x.base} ＋ 青春${x.youth} ＋ 家庭期待${x.expect} ＋ 浪人${x.ron} ＋ 同一校再進学${x.repeat}</p>${subjectInfo(x.p)}</div>`}).join('')}</div><div class="row" style="margin-top:16px"><button class="primary" data-act="exportJson">セーブデータを保存</button><button data-act="exportCsv">プレイ履歴をCSVで保存</button><button data-act="new">新しいゲーム</button></div></section>`}
+function ruleContent(){return `<div class="rules"><p><strong>目的：</strong>出生から大学受験まで進み、大学得点、青春得点、家庭期待、浪人の減点を合計して順位を争います。最大4人、同一端末での交代制、または人間1人対上級AI3人の対戦が可能です。AIはオフラインで判断し、ゲーム内で学習・受験・カード使用を自動進行します。AI一時停止や速度変更は上部のボタンで行います。</p>
+<h3>ターンとマス</h3><p>テストプレイ用の「↶ 1手戻す」は直前のボタン操作を取り消します。最大40操作分。戻したあとにもう一度ダイスを振ると出目は変わることがあります。</p><p>未就学児2、小学校6、中学校6、高校6、浪人3ターン。移動はd6。学習マスでは表示された回数分だけ科目を選び、各回で成長ダイスを振ります。高校・浪人は同一科目を1マス2回まで選択可能。小中学校は同一科目の重複不可。出目1〜2で成長0、3〜5で+1、6以上で+2、各科目の上限は20。未就学児期はスキルカードと青春イベントのマスのみで、学習マスはありません。学習マス以外では無料の学習はできません。</p>
+<p>フラッシュカード付き学習マスは、選択した科目から1科目をランダムに出題。10秒以内の正解でその科目の成長ダイスだけ一時的に1段階強化。正誤は自己申告です。青春イベントマスでは塾・予備校を一律利用できません。休息マスは効果なしで、資金1の塾を選択できます。スキルマス等でもマスの効果と塾を選択でき、学習マスでは処理後に塾を追加利用できます。</p>
+<h3>出生・資金</h3><p>全科目0から開始し、親の大学卒人数に応じて0〜2科目に初期学力+1。得意d8、普通d6、苦手d4から開始します。家計の低・中・高に応じて各ステージ開始時に資金2・3・4を支給（持ち越し可）。私立中高は受験した時点で資金2（不合格でも返金なし）。特待合格（中学合格点+10、高校+12）で全額返還。塾1、私立大学の出願1を消費します。</p>
+<h3>成長ダイス強化</h3><p>ランダムの自動ランクアップは廃止しました。使い切りカード「才能開花」を使用すると好きな1科目のダイスを1段階強化できます。d4→d6→d8→d10→d12まで。</p>
+<h3>放課後7マス</h3><p>高校の学校ボードの「放課後マス」から、移動ダイスの残り歩数を使って1マス目に進入。1・3・7マス目が出口で、3・7マス目は止まれば青春イベントも発生します。7を越えられない場合は停止して次の手番で帰還。同じ移動ロールで学校→放課後→学校、あるいは放課後→学校→放課後と往復することはできません。</p>
+<h3>スキルカード</h3><p>通常2枠＋出生時気質専用1枠。永続スキルは原則1ステージ1回、ただし「文理横断の学習」は<strong>各学習マスで毎回</strong>有効。1枚で選択科目+1、同名カードを2枚重ねると+2（1枠・最大5科目）。その他の永続スキルは重複不可。「青春の底力」は青春3個以上で毎回1科目の学習結果を2倍（塾を除く）。永続スキルは自由に捨てられませんが、新しいカードを引いたときは既存のカードを破棄して交換可。デメリットは強制取得で、満枠ならランダムに1枠置換します。使い切りカードは1ターン最大1枚です。</p>
+<p>攻撃・協調カードは相手の手番外でも効果が残ります。協調は対象プレイヤーの同意が必要です。気質は全員最初から1枚、通常のスキルと同じ山札に個別の気質カードを混ぜ、引いた場合は交換可能。疲労・部活実績・スポーツ推薦は廃止しました。</p>
+<h3>中学・高校入試（今回の変更）</h3><p>中学：国数理社の4科目、高校：5科目について、<strong>各科目の能力値＋その科目の成長ダイス1回の生の出目</strong>を合計し、受験先ごとの合格ライン以上なら合格。中高の合格ラインは（私立中${G?.schoolCut?.middle??27}、公立進学校${G?.schoolCut?.high_public??33}、私立進学校${G?.schoolCut?.high_private??46}）。公立中学・公立共学校は無試験で選択可能。</p>
+<h3>大学入試</h3><p>最大6校、うち国公立は最大2校。国公立は一次として5科目の文理別最低能力値（文系は理科-2、理系は社会-2）を満たす必要があり、2校目は各科目の基準+1。私立は足切りなし。二次・私立は対象科目の能力値＋各科目の成長ダイスの出目を大学別の係数で傾斜し合計。入試ダイスの振り直しは1大学の同じ科目につき最大1回。大学の難度・科目・点数はゲーム用の仮設定で、現実の入試を正確に表すものではありません。</p>
+<h3>高校3ターン目の模試</h3><p>3ターン終了後に全員最大3校を無料で仮受験。模試に限って国公立も最大3校選択可能で、2校目と3校目は後期候補として足切り+1を適用。成績差を表示し、資金・カード・永続スキルの使用回数・本番の合格結果には影響しません。</p><h3>青春・浪人</h3><p>青春イベント1回につき原則1トークン。3個以上で4点、以降は1個増えるたび+1点。浪人すると現役合格校をすべて放棄し、青春トークン1個を没収、最終得点-2。浪人後に現役で合格していた同じ大学へ再合格し進学した場合は追加-2。どの大学も出願できない場合は出願せず浪人または終了を選べます。</p>
+<p class="micro">改善AIで検証したシナリオCの大学合格ラインを全81校に適用。大学の足切り・科目・配点、学習や資金、スキル、模試などはVer.0.9から変更していません。</p></div>`}
+function cardContent(){return `<p class="micro">抽選重みはD案のシミュレーション設定に準拠。数値は抽選時の相対重みです。</p><div class="scroll-x"><table class="uni-table"><thead><tr><th>種別</th><th>カード</th><th>効果</th><th>重み</th></tr></thead><tbody>${Object.entries(CARD_WEIGHT).map(([nm,w])=>`<tr><td>${Object.prototype.hasOwnProperty.call(TRAITS,nm)?'気質':NEG.includes(nm)?'デメリット':PERSIST.includes(nm)?'永続':'使い切り'}</td><td>${e(nm)}</td><td>${e(CARD_DESC[nm]||TRAITS[nm]||'気質を交換')}</td><td>${w}</td></tr>`).join('')}</tbody></table></div>`}
+function overlay(){if(!(G?.overlay||SETUP.overlay))return '';let typ=G?.overlay||SETUP.overlay,title=typ==='rules'?'ルール（シナリオC・AI対戦）':typ==='cards'?'スキルカード一覧':'保存・デバッグ・検証設定';
+ let content=typ==='rules'?ruleContent():typ==='cards'?cardContent():`<div class="stack"><div><button data-act="exportJson">JSONセーブを書き出す</button> <button data-act="exportCsv">履歴CSVを書き出す</button></div><label>JSONセーブの読み込み <input type="file" id="importSave" accept=".json,application/json" /></label><hr class="sep"><p class="micro">中高入試ラインは前回の検証を踏まえた試験設定です。特待条件は中学+10、高校+12で固定です。次の受験から反映します。</p><div class="row"><label>私立中 <input type="number" id="cutMid" min="1" max="150" value="${G.schoolCut.middle}"/></label><label>公立進学校 <input type="number" id="cutPub" min="1" max="150" value="${G.schoolCut.high_public}"/></label><label>私立進学校 <input type="number" id="cutPriv" min="1" max="150" value="${G.schoolCut.high_private}"/></label></div><button data-act="saveCuts">入試ラインを変更</button><hr class="sep"><h3>テスト用操作</h3><p class="micro">進行不能の調査用です。通常のバランス検証では使用しないでください。</p><div class="row"><button data-act="debugMoney">現在のプレイヤーに資金+1</button><button data-act="debugSkill">現在のプレイヤーに文理横断を1枚付与</button></div></div>`;
+ return `<div class="modalwrap"><section class="modal"><div class="titleline"><h2>${title}</h2><button class="small" data-act="undo" ${UNDO_STACK.length?'':'disabled'}>↶ 1手戻す</button><button data-act="closeOverlay">閉じる ×</button></div>${content}</section></div>`}
+function render(){const root=$('app');if(!root)return;let content=!G?renderSetup():G.screen==='play'?renderPlay():G.screen==='schoolExam'?renderSchoolExam():G.screen==='uniExam'?renderUniExam():G.screen==='mockExam'?renderMockExam():renderResults();root.innerHTML=header()+`<main class="shell">${content}<footer class="footer">大学受験すごろく　シナリオC／v1.1-AI　・　オフライン動作　・　大学の難度と配点は仮設定</footer></main>`+overlay();if(G?.phase==='quiz')startTimer();scheduleAI()}
+function download(name,content,mime){let a=document.createElement('a'),blob=new Blob([content],{type:mime}),url=URL.createObjectURL(blob);a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function exportCSV(){let rows=[['時期','内容'],...G.history.slice().reverse().map(x=>[x.when,x.msg])];download('大学受験すごろく_D_履歴.csv','\ufeff'+rows.map(row=>row.map(x=>'"'+String(x).replaceAll('"','""')+'"').join(',')).join('\r\n'),'text/csv;charset=utf-8')}
+function debugUser(){if(!G)return null;return G.screen==='play'?active():G.screen==='uniExam'?examP():G.screen==='schoolExam'?schoolP():G.players[0]}
+function dispatch(act,val){try{
+ if(act==='undo'){undoAction();return}
+ if(act==='help'){if(G)G.overlay='rules';else SETUP.overlay='rules';render();return}
+ if(act==='cardsInfo'){if(!G)SETUP.overlay='cards';else G.overlay='cards';render();return}
+ if(act==='closeOverlay'){if(!G)SETUP.overlay=null;else G.overlay=null;render();return}
+ if(act==='new'){if(G&&!confirm('現在のゲームを破棄して新しく始めますか？　JSONセーブは手動で書き出してください。'))return;resetUndo();G=null;try{localStorage.removeItem(STORE)}catch(ex){}render();return}
+ if(act==='start'){SETUP.aiMode=$('setupOpponent').value==='ai';SETUP.count=SETUP.aiMode?4:Number($('setupCount').value);SETUP.quick=$('setupQuick').value==='true';fresh();return}
+ if(act==='resume'){if(load())render();return}
+ if(!G)return;
+ if(act==='aiPause'){G.aiPaused=!G.aiPaused;save();render();return}
+ if(act==='aiSpeed'){G.aiSpeed=G.aiSpeed==='slow'?'fast':'slow';save();render();return}
+ if(act==='settings'){G.overlay='settings';render();return}
+ if(act==='exportJson'){download('大学受験すごろく_C_v1.1_AI_セーブ.json',JSON.stringify(G,null,2),'application/json;charset=utf-8');return}
+ if(act==='exportCsv'){exportCSV();return}
+ if(act==='saveCuts'){for(let [k,id] of [['middle','cutMid'],['high_public','cutPub'],['high_private','cutPriv']]){let v=Number($(id).value);if(Number.isFinite(v))G.schoolCut[k]=Math.max(1,Math.min(150,Math.round(v)))}log('中高入試ラインをテスト用に変更した');save();render();return}
+ if(act==='debugMoney'){let p=debugUser();if(p){p.money++;log(`${p.name}：デバッグ操作で資金+1`)}save();render();return}
+ if(act==='debugSkill'){let p=debugUser();if(p){let c=card(p,'文理横断の学習');if(c)c.stack=Math.min(2,c.stack+1);else if(p.cards.length<2)p.cards.push({name:'文理横断の学習',stack:1});else p.cards[0]={name:'文理横断の学習',stack:1};log(`${p.name}：デバッグ操作で文理横断を付与`)}save();render();return}
+ if(act==='cardRank'){cardRankChoose(val);return}
+ if(act==='roll'){beginMove();return}
+ if(act==='adjust'){moveAdjust(val);return}
+ if(act==='path'){choosePath(val);return}
+ if(act==='toggleSub'){toggleSub(val);return}
+ if(act==='extraStudy'){consumeExtraStudy();return}
+ if(act==='studyConfirm'){confirmStudy();return}
+ if(act==='quizReveal'){quizReveal();return}
+ if(act==='quizDone'){quizDone(val==='yes');return}
+ if(act==='eventChoice'){eventChoice(val);return}
+ if(act==='traitDraw'){drawnTrait(val);return}
+ if(act==='cardReplace'){drawnCard(val);return}
+ if(act==='requestTutor'){requestTutor();return}
+ if(act==='tutorSub'){takeTutor(val);return}
+ if(act==='endTurn'){finishStop();return}
+ if(act==='cardStart'){cardStart(val);return}
+ if(act==='cardTarget'){cardTarget(val);return}
+ if(act==='consent'){consentCard(val==='yes');return}
+ if(act==='cancelCard'){cancelCard();return}
+ if(act==='schoolApply'){schoolApply(val);return}
+ if(act==='schoolNext'){nextSchool();return}
+  if(act==='studyBoost'){studyBoost(val);return}
+  if(act==='mockToggle'){mockToggle(val);return}
+  if(act==='mockSubmit'){mockSubmit();return}
+  if(act==='mockRoll'){mockRoll();return}
+  if(act==='mockReroll'){mockReroll(val);return}
+  if(act==='mockContinue'){mockContinue();return}
+  if(act==='mockNext'){mockNextPlayer();return}
+ if(act==='uniToggle'){uniToggle(val);return}
+ if(act==='uniSubmit'){uniSubmit();return}
+ if(act==='uniRoll'){uniRoll();return}
+ if(act==='uniReroll'){let [s,source]=val.split('|');uniReroll(s,source);return}
+ if(act==='uniContinue'){uniContinue();return}
+ if(act==='uniDecision'){uniDecision(val);return}
+ }catch(ex){console.error(ex);alert('処理中にエラーが発生しました：'+ex.message+'。セーブデータは保存したままです。')}}
+/* Ver.1.1: local, rule-based advanced opponents. Uses the original game engine,
+   including actual rolls/fees/admission constraints. Never reads future random outcomes. */
+let AI_TIMER=null;
+function aiCurrentActor(){
+ if(!G||!G.aiMode||G.screen==='results'||G.overlay)return null;
+ if(G.screen==='play'){
+  if(G.phase==='cardConsent')return G.players[G.pendingCard?.target];
+  return active();
+ }
+ if(G.screen==='schoolExam')return schoolP();
+ if(G.screen==='mockExam')return mockP();
+ if(G.screen==='uniExam'){
+  if(G.phase==='cardConsent')return G.players[G.pendingCard?.target];
+  return examP();
+ }
+ return null;
+}
+function aiShouldMove(){return G&&G.aiMode&&!G.aiPaused&&!G.overlay&&aiCurrentActor()?.ai===true;}
+function scheduleAI(){
+ if(AI_TIMER!==null){clearTimeout(AI_TIMER);AI_TIMER=null}
+ if(!aiShouldMove())return;
+ AI_TIMER=setTimeout(()=>{AI_TIMER=null;if(aiShouldMove())aiStepSafe()},G.aiSpeed==='slow'?330:32);
+}
+function aiStepSafe(){
+ if(!aiShouldMove())return;
+ try{aiStep()}catch(err){console.error('AI auto action failed',err);G.aiPaused=true;G.aiError=String(err);save();render()}
+}
+function aiSay(p,msg){p.aiReason=msg;}
+const aiMeanDie=(p,s)=> (SIDES[p.tiers[s]]+1)/2;
+const aiVarianceDie=(p,s)=> (SIDES[p.tiers[s]]**2-1)/12;
+function aiNormalCDF(x){
+ // Abramowitz & Stegun approximation, max error ~8e-8.
+ let z=Math.abs(x), t=1/(1+0.2316419*z);
+ let q=Math.exp(-z*z/2)/Math.sqrt(2*Math.PI)*t*(0.319381530+t*(-0.356563782+t*(1.781477937+t*(-1.821255978+t*1.330274429))));
+ return x>=0?1-q:q;
+}
+function aiPassChance(p,u,natIndex=0,forecast=0){
+ if(!u.cost&&SUB.some(s=>p.stats[s]+forecast<(u.min[s]??0)+(natIndex>0?1:0)))return 0;
+ let mean=0,variance=0;
+ for(let s of u.subs){const weight=u.w[s]??1;mean+=(p.stats[s]+forecast+aiMeanDie(p,s))*weight;variance+=aiVarianceDie(p,s)*weight**2;}
+ // Continuity correction for mostly-integer sums, use small softness in extreme cases.
+ let prob=1-aiNormalCDF((u.cut-mean-0.30)/Math.sqrt(Math.max(0.05,variance)));
+ return Math.max(0.000001,Math.min(0.999999,prob));
+}
+function aiValue(p,u){return u.points+(p.edu===0&&u.points>=15?2:0)-(p.edu===2&&u.points<14?2:0);}
+function aiFocus(p){
+ if(p.aiFocus?.length===3)return p.aiFocus;
+ const sorted=SUB.slice().sort((a,b)=>(p.tiers[b]-p.tiers[a])||a.localeCompare(b));
+ let focus=['英'];
+ for(const s of sorted)if(!focus.includes(s)){focus.push(s);if(focus.length===3)break;}
+ p.aiFocus=focus;return focus;
+}
+function aiNationalInclination(p){
+ if(p.aiStyle==='private')return 0;
+ if(G.stage===0)return p.aiStyle==='national'?0.85:0.32;
+ let strength=SUB.reduce((x,s)=>x+p.stats[s],0)/5;
+ let lowest=Math.min(...SUB.map(s=>p.stats[s]));
+ let rest=G.stage===1?12:G.stage===2?6:G.stage===3?Math.max(0,6-G.round):2;
+ let cutoff=G.stage>=3?5:3;
+ // Only maintain broad schooling when it remains plausible, esp. in high school.
+ let tendency=p.aiStyle==='national'?0.75:0.31;
+ if(G.stage>=3&&lowest+0.70*rest<cutoff)tendency*=0.38;
+ if(G.stage>=3&&strength>=6.7)tendency+=0.18;
+ return Math.min(1,tendency);
+}
+function aiGoal(p){
+ const f=aiFocus(p),nat=aiNationalInclination(p);
+ if(nat>0.5){
+  const science=p.stats['理']+aiMeanDie(p,'理')+p.stats['数']+aiMeanDie(p,'数')>=p.stats['国']+p.stats['社']+aiMeanDie(p,'社')?true:false;
+  const target=UNIS.filter(u=>!u.cost&&u.points>=13&&u.points<=19&&u.subs.includes(science?'理':'社'));
+  return target.sort((a,b)=>Math.abs(aiPassChance(p,b,0,Math.max(0,3-G.stage))-0.25)-Math.abs(aiPassChance(p,a,0,Math.max(0,3-G.stage))-0.25))[0]||UNIS[0];
+ }
+ const options=UNIS.filter(u=>u.cost&&u.points>=8&&u.points<=17);
+ return options.map(u=>({u,fit:u.subs.reduce((a,s)=>a+(f.includes(s)?2.2:-2.0)+(p.tiers[s]*0.13),0)-Math.abs(u.points-14)*0.16})).sort((a,b)=>b.fit-a.fit)[0]?.u||UNIS[32];
+}
+function aiLearnWeight(p,s){
+ let focus=aiFocus(p),nat=aiNationalInclination(p),mean=aiMeanDie(p,s),current=p.stats[s];
+ let schoolRemainder=Math.max(0,G.stage===1?12:G.stage===2?6:G.stage===3?6-G.round:3);
+ let broad=nat*(1.0+0.5*Math.max(0,6-current)/6)+0.11;
+ let spec=(1-nat)*(focus.includes(s)?2.20:0.13);
+ let need=nat>0.35&&current<Math.min(9,5+schoolRemainder*0.30)?0.75*nat:0;
+ let cardBonus=has(p,'青春の底力')&&p.youth>=3?0.22:0;
+ // After the halfway mock, weight subjects used in the chosen reachable target.
+ let mockPriority=0;
+ if(G.stage===3&&G.round>=4&&p.aiMockTarget){
+   const target=UNIS.find(u=>u.name===p.aiMockTarget);
+   if(target&&target.subs.includes(s)){
+     const deficit=target.cut-target.subs.reduce((total,q)=>total+(p.stats[q]+aiMeanDie(p,q))*(target.w[q]??1),0);
+     if(deficit>0&&deficit<28)mockPriority=0.43*(target.w[s]??1);
+     else if(deficit<=0&&deficit>-12)mockPriority=0.10*(target.w[s]??1);
+   }
+ }
+ return (broad+spec+need+cardBonus+mockPriority)*(mean>=3?1:0.92)*Math.max(0.015,(20-current)/20);
+}
+function aiBestSubject(p){return SUB.filter(s=>p.tiers[s]<4).sort((a,b)=>aiLearnWeight(p,b)-aiLearnWeight(p,a))[0]||'英';}
+function aiStudyPlan(p,k){
+ const cap=[3,4].includes(G.stage)?2:1,selected=[];
+ for(let i=0;i<k;i++){
+  let choices=SUB.filter(s=>selected.filter(x=>x===s).length<cap);
+  let s=choices.sort((a,b)=>{
+   const countA=selected.filter(x=>x===a).length,countB=selected.filter(x=>x===b).length;
+   let valueA=aiLearnWeight(p,a)*(countA===0?1:0.76),valueB=aiLearnWeight(p,b)*(countB===0?1:0.76);
+   return valueB-valueA;
+  })[0];
+  if(!s)break;selected.push(s);
+ }
+ return selected;
+}
+function aiTileValue(p,t){
+ if(!t)return -20;
+ if(t.type==='study'){
+  const count=Math.min(5,(t.k||1)+(card(p,'文理横断の学習')?.stack||0));
+  let reward=aiStudyPlan(p,count).reduce((sum,s)=>sum+aiLearnWeight(p,s)*0.75,0);
+  return reward+(t.quiz?0.33:0);
+ }
+ if(t.type==='skill')return (p.cards.length<2?3.5:2.1)+(G.stage<=2?0.8:0);
+ if(t.type==='trait')return 1.15;
+ if(t.type==='youth')return p.youth<3?2.65:p.youth<5?1.7:1.2;
+ if(t.type==='portal')return p.youth<3?1.1:0.25;
+ if(t.type==='event')return p.money>1&&G.stage>0?0.95:0.12;
+ if(t.type==='exit')return 0.5;
+ return 0;
+}
+function aiProjectedLanding(p,delta,op=null){
+ let board=p.board,pos=p.pos,switched=G.switchedRoll;
+ let remaining=Math.max(0,G.remaining+delta);
+ if(op){remaining=Math.max(0,remaining-1);if(op.type==='step')pos=op.to;else if(op.type==='enter'){board='after';pos=0;switched=true;}else if(op.type==='exit'){board=p.school;pos=p.lastPortal;switched=true;}}
+ while(remaining>0){
+  if(board==='after'){
+   if(pos>=6)break;
+   // In simulation, choose the return path when it appears more useful.
+   if([0,2].includes(pos)&&!switched&&aiTileValue(p,BOARD_DATA[p.school][p.lastPortal])>aiTileValue(p,BOARD_DATA.after[Math.min(pos+1,6)])+0.3){board=p.school;pos=p.lastPortal;switched=true;}
+   else pos++;
+  }else{
+   if(G.stage===3&&board.startsWith('high_')&&[3,9,15,20].includes(pos)&&!switched&&p.aiStyle==='youth'&&p.youth<5){board='after';pos=0;switched=true;}
+   else pos=(pos+1)%BOARD_DATA[board].length;
+  }
+  remaining--;
+ }
+ return aiTileValue(p,BOARD_DATA[board]?.[pos]);
+}
+function aiSchoolChoice(p,middle){
+ const pub=middle?'midpub':'high_public',pri=middle?'midpri':'high_private',base=middle?G.schoolCut.middle:G.schoolCut.high_private;
+ const subjects=middle?['国','数','理','社']:SUB;
+ const avg=subjects.reduce((a,s)=>a+p.stats[s]+aiMeanDie(p,s),0);
+ const variance=subjects.reduce((a,s)=>a+aiVarianceDie(p,s),0);
+ const success=1-aiNormalCDF((base-avg-0.5)/Math.sqrt(variance));
+ if(middle){if(p.money<2)return 'midpub';return success>=0.33&&(p.aiStyle!=='youth'||success>0.58)?'midpri':'midpub';}
+ const publicSuccess=1-aiNormalCDF((G.schoolCut.high_public-avg-0.5)/Math.sqrt(variance));
+ if(p.money>=2&&success>=0.35&&(p.aiStyle!=='youth'||success>0.65))return pri;
+ return publicSuccess>0.43?pub:'high_coed';
+}
+function aiCardValue(p,name){
+ if(NEG.includes(name))return -10;
+ if(name==='文理横断の学習')return G.stage<=2?11:8;
+ if(name==='青春の底力')return p.youth>=3?10:p.youth===2?8:4;
+ if(name==='才能開花')return G.stage<3?8:5.5;
+ if(name==='予備校優待')return G.stage<4?5:3;
+ if(name==='効率的な勉強法'||name==='弱点克服')return 5.8;
+ if(name==='進路の先読み')return 5.5;
+ if(name==='模擬試験の達人')return G.stage>=3?6:4;
+ if(name==='クラスの人気者')return p.aiStyle==='youth'?7:4;
+ if(name==='赤本')return G.stage>=3?5:3;
+ if(name==='追加履修券'||name==='復習ノート'||name==='塾の無料券')return 3.7;
+ if(name==='文化祭招待券')return p.aiStyle==='youth'?4.5:2.8;
+ return 2.6;
+}
+function aiChoosePortfolio(p,mock=false){
+ let candidates=UNIS.map((u,i)=>({u,i}));
+ if(mock){
+  const plan=[];
+  // One stretch, one matching, one safe; all can include nationals.
+  const options=candidates.map(x=>({...x,prob:aiPassChance(p,x.u,0),fit:aiValue(p,x.u)}));
+  const attainable=options.filter(x=>x.prob>=0.10).sort((a,b)=>(b.fit+3*b.prob)-(a.fit+3*a.prob));
+  if(attainable.length)plan.push(attainable[0].i);
+  const near=options.filter(x=>!plan.includes(x.i)).sort((a,b)=>Math.abs(a.prob-0.45)-Math.abs(b.prob-0.45)||b.fit-a.fit);
+  if(near.length)plan.push(near[0].i);
+  const ambition=options.filter(x=>!plan.includes(x.i)).sort((a,b)=>b.fit-a.fit||b.prob-a.prob);
+  if(ambition.length)plan.push(ambition[0].i);
+  return plan.slice(0,3);
+ }
+ const selected=[];let funds=p.money;
+ const E=(ls)=>{
+  const probabilities=ls.map(({u,prob})=>({score:Math.max(0,aiValue(p,u)),prob}));
+  return Array.from({length:25},(_,point)=>point+1).reduce((res,t)=>res+1-probabilities.filter(x=>x.score>=t).reduce((pr,x)=>pr*(1-x.prob),1),0);
+ };
+ for(let k=0;k<6;k++){
+  let best=null,bestInc=0.012,current=E(selected);
+  const nats=selected.filter(x=>!x.u.cost).length;
+  for(const {i,u} of candidates){
+   if(selected.some(x=>x.i===i)||u.cost>funds||(u.cost===0&&nats>=2))continue;
+   const prob=aiPassChance(p,u,nats);
+   if(prob<0.0003)continue;
+   const inc=E([...selected,{i,u,prob}])-current;
+   const scale=u.cost?1:1.001;
+   if(inc*scale>bestInc){bestInc=inc*scale;best={i,u,prob}}
+  }
+  if(!best)break;
+  selected.push(best);funds-=best.u.cost;
+ }
+ return selected.map(x=>x.i);
+}
+function aiRankSource(p){return rerollSources(p).find(x=>x.id!=='赤本')||rerollSources(p)[0]}
+function aiTargetOpponent(p){
+ const others=G.players.filter(x=>x.id!==p.id);
+ return others.sort((a,b)=>((b.finalPts||0)+youthScore(b.youth)+SUB.reduce((v,s)=>v+b.stats[s],0)*0.13)-((a.finalPts||0)+youthScore(a.youth)+SUB.reduce((v,s)=>v+a.stats[s],0)*0.13))[0];
+}
+function aiPrepCard(p){
+ if(p.usedConsumable||!['move','afterStop'].includes(G.phase))return false;
+ if(has(p,'才能開花')&&SUB.some(s=>p.tiers[s]<4)){
+  aiSay(p,'成長ダイスを永続強化する「才能開花」を使用');cardStart('才能開花');return true;
+ }
+ if(['ノート隠し','足止め'].some(n=>has(p,n))&&G.stage>=2&&G.round>3){
+  const nm=has(p,'足止め')?'足止め':'ノート隠し';aiSay(p,'他プレイヤーへの妨害カードを使用');cardStart(nm);return true;
+ }
+ if(['合同勉強会','模試の情報交換','文化祭の共同企画'].some(n=>has(p,n))){
+  const nm=['合同勉強会','模試の情報交換','文化祭の共同企画'].find(n=>has(p,n));
+  aiSay(p,'双方に有利な協調カードを提案');cardStart(nm);return true;
+ }
+ return false;
+}
+function aiTutorWanted(p){
+ if(G.stage===0||G.pendingTile?.type==='youth'||!payTutorPossible(p)||G.tutorDone)return false;
+ const availableFree=(has(p,'予備校優待')&&!used(p,'予備校優待'))||(has(p,'塾の無料券')&&!p.usedConsumable);
+ if(availableFree)return true;
+ const schoolReserve=G.stage<3?2:0;
+ return p.money>=schoolReserve+3&&(G.stage>=2||p.aiStyle!=='youth');
+}
+function aiChooseReroll(p,faces,subs,w,already=[]){
+ const choices=subs.filter(s=>!already.includes(s)).map(s=>({s,potential:(SIDES[p.tiers[s]]-faces[s].face)*(w[s]??1)})).sort((a,b)=>b.potential-a.potential);
+ return choices[0]?.potential>0.01?choices[0].s:null;
+}
+function aiStep(){
+ if(!aiShouldMove())return;
+ let p=aiCurrentActor();
+ if(G.phase==='cardConsent'){consentCard(true);return}
+ if(G.screen==='schoolExam'){
+  if(G.pendingSchool.last){nextSchool();return}
+  const choice=aiSchoolChoice(p,G.pendingSchool.type==='middle');
+  aiSay(p,`資金と合格見込みから${SCNAMES[choice]}を選択`);schoolApply(choice);return;
+ }
+ if(G.screen==='mockExam'){
+  const m=G.mock;
+  if(G.phase==='mockChoose'){
+   if(!m.aiPlan)m.aiPlan=aiChoosePortfolio(p,true);
+   if(m.choices.length<m.aiPlan.length){mockToggle(m.aiPlan[m.choices.length]);return}
+   aiSay(p,'挑戦校・実力相応校・安全校の3校で模試');mockSubmit();return;
+  }
+  if(G.phase==='mockReady'){mockRoll();return}
+  if(G.phase==='mockRolled'){
+   const x=m.current,u=UNIS[x.uid],src=[];
+   if(p.trait==='本番に強い')src.push('本番に強い');
+   if(has(p,'模擬試験の達人'))src.push('模擬試験の達人');
+   if(has(p,'赤本'))src.push('赤本');
+   let source=src.find(t=>!x.sourcesUsed.includes(t));
+   if(source&&!x.passed&&!x.floorFails.length){let sub=aiChooseReroll(p,x.faces,u.subs,u.w,x.rerolled);if(sub){mockReroll(sub+'|'+source);return}}
+   mockContinue();return;
+  }
+  if(G.phase==='mockSummary'){
+   const passes=m.results.filter(x=>x.passed);
+   aiSay(p,`模試${m.results.length}校・合格判定${passes.length}校、残りの学習を調整`);
+   // Alter the school objective toward the most promising mock exam when appropriate.
+   if(m.results.length){const near=m.results.slice().filter(x=>x.floorFails?.length===0).sort((a,b)=>{
+     const va=a.points-0.20*Math.abs(a.score-a.cutoff)+(a.score>=a.cutoff?0.7:0);
+     const vb=b.points-0.20*Math.abs(b.score-b.cutoff)+(b.score>=b.cutoff?0.7:0);
+     return vb-va;
+   })[0];if(near)p.aiMockTarget=near.name;}
+   mockNextPlayer();return;
+  }
+ }
+ if(G.screen==='uniExam'){
+  if(G.phase==='examChoose'){
+   if(!G.exam.aiPlan){G.exam.aiPlan=aiChoosePortfolio(p,false);aiSay(p,`合格確率・進学得点・併願効果を比較して最大6校選択`);log(`${p.name}が入試の期待値を比較して志望校を決定`)}
+   if(G.exam.choices.length<G.exam.aiPlan.length){uniToggle(G.exam.aiPlan[G.exam.choices.length]);return}
+   uniSubmit();return;
+  }
+  if(G.phase==='examReady'){uniRoll();return}
+  if(G.phase==='examRolled'){
+   const x=G.exam.current,u=UNIS[x.uid],source=aiRankSource(p);
+   if(!x.passed&&source){const sub=aiChooseReroll(p,x.faces,u.subs,u.w,x.rerolled);if(sub){aiSay(p,`${u.name}の${sub}の入試ダイスを振り直し`);uniReroll(sub,source.id);return}}
+   uniContinue();return;
+  }
+  if(G.phase==='examDecision'){
+   let offers=G.exam.offers.slice().sort((a,b)=>b.points-a.points),best=offers[0];
+   const chanceRonin=!G.exam.ronin&&(!best||best.points<=7&&p.money>=2&&p.youth<=4);
+   aiSay(p,chanceRonin?'現在の合格先と浪人後の期待値から浪人を選択':'合格先のうち得点最大の大学へ進学');
+   uniDecision(chanceRonin?'ronin':'finish');return;
+  }
+ }
+ if(G.screen==='play'){
+  if(G.phase==='move'){
+   if(aiPrepCard(p))return;
+   aiSay(p,'移動d6を振り、到達マスと経路を比較');beginMove();return;
+  }
+  if(G.phase==='adjustMove'){
+   const opts=[-1,0,1].map(x=>({x,val:aiProjectedLanding(p,x)})).sort((a,b)=>b.val-a.val);
+   const decision=opts[0].val>aiProjectedLanding(p,0)+0.34?opts[0].x:0;
+   if(decision!==0)aiSay(p,`進路の先読みで移動${decision>0?'+1':'−1'}を選択`);
+   moveAdjust(String(decision));return;
+  }
+  if(G.phase==='choosePath'){
+   const opts=moveOptions(),best=opts.map((op,i)=>({i,v:aiProjectedLanding(p,0,op)})).sort((a,b)=>b.v-a.v)[0];
+   if(!best)throw Error('進路選択肢がありません');aiSay(p,`分岐を比較し、停止マスの見込みで経路${best.i+1}を選択`);choosePath(String(best.i));return;
+  }
+  if(G.phase==='studyPick'){
+   const plan=aiStudyPlan(p,G.study.k);
+   // Avoid optional extra study consumables if no more than one category available.
+   if(has(p,'追加履修券')&&!p.usedConsumable&&G.study.k<5&&G.stage>=2&&G.study.selected.length===0){consumeExtraStudy();return}
+   let current=G.study.selected;
+   if(current.length<G.study.k){
+    // Plan can include repeated subjects; add first unmet subject.
+    let count={},usedC={};plan.forEach(s=>count[s]=(count[s]||0)+1);current.forEach(s=>usedC[s]=(usedC[s]||0)+1);
+    let s=plan.find(q=>(usedC[q]||0)<(count[q]||0));if(!s)throw Error('学習科目を選択できません');toggleSub(s+'|add');return;
+   }
+   if(has(p,'青春の底力')&&p.youth>=3&&!G.study.boostSub){
+    const options=[...new Set(current)].sort((a,b)=>current.filter(x=>x===b).length*aiLearnWeight(p,b)-current.filter(x=>x===a).length*aiLearnWeight(p,a));
+    studyBoost(options[0]);return;
+   }
+   aiSay(p,`育成方針に従い${current.join('・')}を学習`);confirmStudy();return;
+  }
+  if(G.phase==='quiz'){
+   // Advanced AI answers probabilistically, rather than peeking at the answer.
+   const correct=Math.random()<0.76;quizDone(correct);return;
+  }
+  if(G.phase==='eventChoice'){
+   let type=G.pendingTile?.type;
+   if((type==='event'||type==='trait')&&aiTutorWanted(p)&&type==='event')eventChoice('tutor');
+   else eventChoice('event');return;
+  }
+  if(G.phase==='traitDraw'){
+   const newName=G.pendingDraw.name,old=p.trait,quality={ 'コツコツ型':5,'一夜漬け型':5.3,'気分屋':4.5,'本番に強い':4.8,'社交的':p.aiStyle==='youth'?7:4.2,'探究型':p.aiStyle==='national'?5.8:3.4};
+   drawnTrait((quality[newName]||3)>(quality[old]||3)?'yes':'no');return;
+  }
+  if(G.phase==='cardReplace'){
+   const incoming=G.pendingDraw?.name,values=p.cards.map(c=>aiCardValue(p,c.name)),worst=values.indexOf(Math.min(...values));
+   const wanted=aiCardValue(p,incoming)>values[worst]+0.1;
+   aiSay(p,wanted?`${incoming}を取得し手札を最適化`:`既存スキルを優先して${incoming}を破棄`);
+   drawnCard(wanted?String(worst):'skip');return;
+  }
+  if(G.phase==='cardRankPick'){
+   const s=aiBestSubject(p);aiSay(p,`${s}の成長ダイスを強化`);cardRankChoose(s);return;
+  }
+  if(G.phase==='cardTarget'){
+   const name=G.pendingCard?.name;
+   let target=aiTargetOpponent(p);
+   if(['合同勉強会','模試の情報交換','文化祭の共同企画'].includes(name)){
+    target=G.players.filter(x=>x.id!==p.id&&x.ai).sort((a,b)=>SUB.reduce((z,s)=>z+b.stats[s]-a.stats[s],0))[0]||G.players.find(x=>x.id!==p.id);
+   }
+   if(!target){cancelCard();return}cardTarget(String(target.id));return;
+  }
+  if(G.phase==='cardConsent'){consentCard(true);return}
+  if(G.phase==='tutorPick'){let s=aiBestSubject(p);aiSay(p,`塾で${s}を追加学習`);takeTutor(s);return}
+  if(G.phase==='afterStop'){
+   if(aiPrepCard(p))return;
+   if(aiTutorWanted(p)){requestTutor();return}
+   finishStop();return;
+  }
+ }
+ throw Error('AI処理が未対応の状態: '+G.screen+'/'+G.phase);
+}
+
+document.addEventListener('click',event=>{const b=event.target.closest('[data-act]');if(!b)return;event.preventDefault();
+ const act=b.dataset.act;
+ if(G?.aiMode&&aiCurrentActor()?.ai&&!['undo','aiPause','aiSpeed','help','cardsInfo','closeOverlay','settings','new','exportJson','exportCsv'].includes(act))return;
+ const ignore=['undo','aiPause','aiSpeed','help','cardsInfo','closeOverlay','settings','new','start','resume','exportJson','exportCsv'];
+ const before=G&&!ignore.includes(act)?JSON.stringify(G):null;
+ if(before){UNDO_STACK.push(before);if(UNDO_STACK.length>UNDO_LIMIT)UNDO_STACK.shift();persistUndo()}
+ dispatch(act,b.dataset.val??'');
+ if(before&&JSON.stringify(G)===before){UNDO_STACK.pop();persistUndo();render()}});
+document.addEventListener('change',event=>{let el=event.target;
+ if(el.id==='setupOpponent'){SETUP.aiMode=el.value==='ai';SETUP.count=SETUP.aiMode?4:2;SETUP.names[0]=$('name0')?.value||SETUP.names[0];render()}
+ else if(el.id==='setupCount'){SETUP.count=Number(el.value);for(let i=0;i<4;i++)SETUP.names[i]=$('name'+i)?.value||SETUP.names[i];render()}
+ else if(el.id==='setupQuick'){SETUP.quick=el.value==='true';render()}
+ else if(el.id==='boardView'){G.viewBoard=el.value||null;render()}
+ else if(el.id==='uniFilter'){G.uniFilter=el.value;render()}
+ else if(el.id==='mockFilter'&&G.mock){G.mock.filter=el.value;render()}
+ else if(el.id==='mockSearch'&&G.mock){G.mock.search=el.value;render()}
+ else if(el.id==='uniSearch'){G.uniSearch=el.value;render()}
+ else if(el.id==='importSave'&&el.files?.length){let reader=new FileReader();reader.onload=()=>{try{let obj=JSON.parse(String(reader.result));if(![VERSION,'D-1.0-C','D-0.9-U6','D-0.8-U6'].includes(obj.version)||!Array.isArray(obj.players)||!obj.schoolCut)throw Error('この版で読み込めるセーブデータではありません');if(!confirm('現在のセーブを上書きして再開しますか？'))return;resetUndo();G=obj;G.version=VERSION;G.overlay=null;G.aiMode=!!G.aiMode;G.aiPaused=false;G.aiSpeed=G.aiSpeed||'fast';G.players.forEach(p=>p.ai=!!p.ai);save();render()}catch(err){alert('読み込み失敗：'+err.message)}};reader.readAsText(el.files[0])}
+});
+document.addEventListener('input',event=>{if(event.target.id?.startsWith('name')){const i=Number(event.target.id.slice(4));if(Number.isInteger(i))SETUP.names[i]=event.target.value}});
+try{load()}catch(ex){}render();
+</script></body></html>
